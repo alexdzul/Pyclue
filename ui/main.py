@@ -69,13 +69,11 @@ class MainForm(QtGui.QMainWindow):
     def get_add_icon(self):
         img = "key_add.png"
         path =  os.path.abspath(os.path.join(RESOURCES_DIR,'main/img/%s'%img))
-        print path
         return path
 
     def get_settings_icon(self):
         img = "settings.png"
         path =  os.path.abspath(os.path.join(RESOURCES_DIR,'main/img/%s'%img))
-        print path
         return path
 
     def get_list_elements(self):

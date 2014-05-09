@@ -1,4 +1,4 @@
-pyclue
+Pyclue
 ======
 
-pyclue
+pyPyClue
