@@ -73,10 +73,12 @@ class AddKeyForm(QtGui.QWidget):
         self.lblPassword.setText("Password:")
         self.gridLayout_gbInfo.addWidget(self.lblPassword, 2, 0, 1, 1)
         #Start the generate password button
-        self.btnGenerate = QtGui.QPushButton(self.gbInfo)
-        self.btnGenerate.setObjectName("btnGenerate")
-        self.btnGenerate.setText("Generate")
-        self.gridLayout_gbInfo.addWidget(self.btnGenerate, 2, 2, 1, 1)
+        self.btnRandom = QtGui.QPushButton(self.gbInfo)
+        self.btnRandom.setObjectName("btnRandom")
+        self.btnRandom.setText("Random")
+        icon = QtGui.QIcon(self.get_icon_random_btn())
+        self.btnRandom.setIcon(icon)
+        self.gridLayout_gbInfo.addWidget(self.btnRandom, 2, 2, 1, 1)
         #3. Set group Box Notes and added into a grid element
         self.gbNotes = QtGui.QGroupBox(self)
         self.gbNotes.setObjectName("gbNotes")
@@ -102,6 +104,10 @@ class AddKeyForm(QtGui.QWidget):
         APP_ICON = os.path.join(PROJECT_DIR,"resources/keys/img/key_add.png")
         self.setWindowIcon(QtGui.QIcon(APP_ICON))
 
+    def get_icon_random_btn(self):
+        btnIcon = os.path.join(PROJECT_DIR,"resources/keys/img/random.png")
+        return btnIcon
+
     def run(self):
         self.show()
 
@@ -112,4 +118,4 @@ class AddKeyForm(QtGui.QWidget):
 
     def setConnector(self):
         self.btnCancel.clicked.connect(self.close)
-        self.btnGenerate.clicked.connect(self.set_generate_pass)
+        self.btnRandom.clicked.connect(self.set_generate_pass)
