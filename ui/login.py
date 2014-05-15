@@ -36,7 +36,7 @@ class LoginForm(QtGui.QWidget):
     def createMain(self):
         self.main = MainForm()
         self.hide()
-        self.main.show()
+        self.main.run()
 
     def alert(self, title,  mensaje):
         QtGui.QMessageBox.about(self, title, mensaje)
