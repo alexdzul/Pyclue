@@ -24,7 +24,7 @@ class LoginForm(QtGui.QWidget):
     def exit(self):
         QtCore.QCoreApplication.instance().quit()
 
-    def validateCreedential(self):
+    def validateCredential(self):
         username = self.txtUser.text()
         password = self.txtPassword.text()
         if username == "root" and password == "root":
@@ -43,7 +43,7 @@ class LoginForm(QtGui.QWidget):
 
     def setConnector(self):
         self.btnExit.clicked.connect(self.exit)
-        self.btnLogin.clicked.connect(self.validateCreedential)
+        self.btnLogin.clicked.connect(self.validateCredential)
         self.txtPassword.returnPressed.connect(self.btnLogin.click)
         self.txtUser.returnPressed.connect(self.btnLogin.click)
 

@@ -2,7 +2,6 @@
 __author__ = 'alex'
 import string
 import random
-
 from peewee import *
 from settings import DB_NAME
 

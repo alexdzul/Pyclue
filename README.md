@@ -9,3 +9,10 @@ Requirement
 * PyQt4
 * Python >= 2.7
 * SQlite3
+* Peewee ORM
+
+Author
+======
+
+Alex Dzul.
+Twitter: @alexjs88
