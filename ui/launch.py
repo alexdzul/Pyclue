@@ -5,7 +5,7 @@ from PyQt4 import QtCore
 
 from settings import WELCOME_MESSAGE
 from ui.generics.functions import Center,SetIcon
-from apps.security.controller import create_user
+from apps.security.functions import create_user
 from ui.login import LoginForm
 
 

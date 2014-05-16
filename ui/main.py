@@ -8,7 +8,11 @@ from settings import RESOURCES_DIR
 from ui.keys import AddKeyForm
 
 class MainForm(QtGui.QMainWindow):
-    def __init__(self):
+    def __init__(self,user):
+        """
+        I Build the Form with the User information
+        """
+        self.user = user
         super(MainForm, self).__init__()
         self.constructorUI()
 
@@ -22,7 +26,8 @@ class MainForm(QtGui.QMainWindow):
         # Nombre de la ventana
         self.setWindowTitle('Keys Python')
         # Status Bar
-        self.statusBar().showMessage('By: Alex Dzul')
+        message = "Welcome: %s %s" % (self.user.first_name,self.user.last_name)
+        self.statusBar().showMessage(message)
         # Windows Size
         self.setMinimumSize(700,700)
         self.setGeometry(300,300,450,400)
@@ -107,3 +112,6 @@ class MainForm(QtGui.QMainWindow):
     def createAddForm(self):
         self.addKey = AddKeyForm()
         self.addKey.show()
+
+    def set_statusBar(self,message):
+        self.statusBar().showMessage(message)
