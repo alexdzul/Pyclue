@@ -5,7 +5,7 @@ from PyQt4 import QtCore
 
 from settings import WELCOME_MESSAGE
 from ui.generics.functions import Center,SetIcon
-from apps.security.models import User
+from apps.security.controller import create_user
 from ui.login import LoginForm
 
 
@@ -127,15 +127,19 @@ class LaunchForm(QtGui.QWidget):
         data = self.validate_data()
         if data['status']:
             if self.validate_password():
-                user = User(first_name=self.first_name,
-                            last_name = self.last_name,
-                            username = self.username,
-                            password=self.password_one)
-                user.save()
-                QtGui.QMessageBox.about(self, "Great!", "User created successfuly")
-                self.hide()
-                self.login = LoginForm()
-                self.login.run()
+                success = create_user(self.first_name,
+                            self.last_name,
+                            self.username,
+                            self.password_one)
+                if success:
+                    QtGui.QMessageBox.about(self, "Great!", "User created successfuly")
+                    self.close()
+                    self.login = LoginForm()
+                    self.login.run()
+                else:
+                    QtGui.QMessageBox.about(self, "Error", "Sorry! Unnespected error \n")
+                    self.exit()
+
             else:
                 QtGui.QMessageBox.about(self, "Error", "Password not match")
                 self.txtPassword.setText("")
@@ -184,7 +188,6 @@ class LaunchForm(QtGui.QWidget):
     def validate_password(self):
         pw_1 = self.password_one
         pw_2 = self.password_two
-        print pw_1, pw_2
         response = False
         if pw_1 == "" or pw_2 == "":
             response = False
