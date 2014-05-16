@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 __author__ = 'alex'
-from models import Key, User
-import sys,traceback
+import sys
+import traceback
+
+from apps.security.models import Key, User
+
 
 class Syncdb():
     try:

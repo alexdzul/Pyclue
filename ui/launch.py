@@ -1,8 +1,12 @@
-__author__ = 'edzul'
+# -*- coding: utf-8 -*-
+__author__ = 'alex'
 from PyQt4 import QtGui
 from PyQt4 import QtCore
+
 from settings import WELCOME_MESSAGE
 from ui.generics.functions import Center,SetIcon
+from apps.security.models import User
+from ui.login import LoginForm
 
 
 class LaunchForm(QtGui.QWidget):
@@ -111,4 +115,81 @@ class LaunchForm(QtGui.QWidget):
         self.gridMain.addLayout(self.gridButtons, 4, 0, 1, 1)
 
     def setConnector(self):
+        self.btnSave.clicked.connect(self.save_user)
         self.btnExit.clicked.connect(self.exit)
+
+
+    """
+    Save a User object in the data base
+    """
+    def save_user(self):
+        self.construct_get_data()
+        data = self.validate_data()
+        if data['status']:
+            if self.validate_password():
+                user = User(first_name=self.first_name,
+                            last_name = self.last_name,
+                            username = self.username,
+                            password=self.password_one)
+                user.save()
+                QtGui.QMessageBox.about(self, "Great!", "User created successfuly")
+                self.hide()
+                self.login = LoginForm()
+                self.login.run()
+            else:
+                QtGui.QMessageBox.about(self, "Error", "Password not match")
+                self.txtPassword.setText("")
+                self.txtPassword_2.setText("")
+                self.txtPassword.setFocus()
+        else:
+            QtGui.QMessageBox.about(self, "Error", data['message'])
+
+
+    """
+    Takes the field values and insert it self variables
+    """
+    def construct_get_data(self):
+        self.first_name = self.txtFirstName.text()
+        self.last_name = self.txtLastName.text()
+        self.password_one = self.txtPassword.text()
+        self.password_two = self.txtPassword_2.text()
+        self.username = self.txtUsername.text()
+
+    """
+    Validate empty fields.
+    """
+    def validate_data(self):
+        flag = True
+        message = ""
+        if self.first_name == "":
+            flag = False
+            message += "Field: First Name required \n"
+        if self.last_name == "":
+            flag = False
+            message += "Field: Last Name required \n"
+        if self.username == "":
+            flag = False
+            message += "Field: Username required \n"
+        if self.password_one == "":
+            flag = False
+            message += "Field: Password required \n"
+        if self.password_two == "":
+            flag = False
+            message += "Field: Retype Pass required \n"
+        return {'status':flag,'message':message}
+
+    """
+    Validate correct password
+    """
+    def validate_password(self):
+        pw_1 = self.password_one
+        pw_2 = self.password_two
+        print pw_1, pw_2
+        response = False
+        if pw_1 == "" or pw_2 == "":
+            response = False
+        elif pw_1 == pw_2:
+            response = True
+        else:
+            response = False
+        return response

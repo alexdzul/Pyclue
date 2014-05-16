@@ -4,7 +4,7 @@ from PyQt4 import QtGui
 from PyQt4 import QtCore
 from ui.generics.functions import Center
 from settings import PROJECT_DIR
-from app.models import Key
+from apps.keys.models import Key
 import os
 
 

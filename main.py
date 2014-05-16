@@ -4,7 +4,7 @@ import sys
 from PyQt4 import QtGui
 from ui.login import LoginForm
 from ui.launch import LaunchForm
-from app.security import user_exist
+from apps.security.controller import user_exist
 
 def main():
     app = QtGui.QApplication(sys.argv)
