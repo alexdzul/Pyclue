@@ -21,9 +21,8 @@ class AddKeyForm(QtGui.QWidget):
     def drawUI(self):
         # Set some basic settings to the form
         self.setWindowTitle('Login')
-        self.resize(300,366)
-        self.setMinimumSize(QtCore.QSize(300,366))
-        self.setGeometry(500,300,150,320)
+        self.resize(338, 439)
+        self.setMinimumSize(QtCore.QSize(338, 439))
         Center(self)
         self.set_icon()
         # Start the Vertical Layout
@@ -62,23 +61,31 @@ class AddKeyForm(QtGui.QWidget):
         self.lblEmail.setObjectName("lblEmail")
         self.lblEmail.setText("Email:")
         self.gridLayout_gbInfo.addWidget(self.lblEmail, 1, 0, 1, 1)
+        # Start the txtWebPage and its Label into a grid element
+        self.txtWebpage = QtGui.QLineEdit(self.gbInfo)
+        self.txtWebpage.setObjectName("txtWebpage")
+        self.gridLayout_gbInfo.addWidget(self.txtWebpage, 2, 1, 2, 2)
+        self.lblWebpage = QtGui.QLabel(self.gbInfo)
+        self.lblWebpage.setObjectName("lblWebpage")
+        self.lblWebpage.setText("Web Page:")
+        self.gridLayout_gbInfo.addWidget(self.lblWebpage, 2, 0, 1, 1)
         # Start the txtPassword and its Label into a grid element
         self.txtPassword = QtGui.QLineEdit(self.gbInfo)
         self.txtPassword.setMinimumSize(QtCore.QSize(0, 0))
         self.txtPassword.setEchoMode(QtGui.QLineEdit.Normal)
         self.txtPassword.setObjectName("txtPassword")
-        self.gridLayout_gbInfo.addWidget(self.txtPassword, 2, 1, 1, 1)
+        self.gridLayout_gbInfo.addWidget(self.txtPassword, 4, 1, 1, 1)
         self.lblPassword = QtGui.QLabel(self.gbInfo)
         self.lblPassword.setObjectName("lblPassword")
         self.lblPassword.setText("Password:")
-        self.gridLayout_gbInfo.addWidget(self.lblPassword, 2, 0, 1, 1)
+        self.gridLayout_gbInfo.addWidget(self.lblPassword, 4, 0, 1, 1)
         #Start the generate password button
         self.btnRandom = QtGui.QPushButton(self.gbInfo)
         self.btnRandom.setObjectName("btnRandom")
         self.btnRandom.setText("Random")
         icon = QtGui.QIcon(self.get_icon_random_btn())
         self.btnRandom.setIcon(icon)
-        self.gridLayout_gbInfo.addWidget(self.btnRandom, 2, 2, 1, 1)
+        self.gridLayout_gbInfo.addWidget(self.btnRandom, 4, 2, 1, 1)
         #3. Set group Box Notes and added into a grid element
         self.gbNotes = QtGui.QGroupBox(self)
         self.gbNotes.setObjectName("gbNotes")

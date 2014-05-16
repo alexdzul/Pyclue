@@ -12,6 +12,7 @@ class Key(Model):
     name = CharField()
     username = CharField()
     email = CharField()
+    webpage = CharField()
     password = CharField()
     notes = TextField()
 
