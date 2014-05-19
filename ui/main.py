@@ -110,7 +110,7 @@ class MainForm(QtGui.QMainWindow):
         self.listWidget.addItem(item)
 
     def createAddForm(self):
-        self.addKey = AddKeyForm()
+        self.addKey = AddKeyForm(self.user)
         self.addKey.show()
 
     def set_statusBar(self,message):

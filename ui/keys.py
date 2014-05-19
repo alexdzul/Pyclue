@@ -5,13 +5,15 @@ from PyQt4 import QtCore
 from ui.generics.functions import Center
 from settings import PROJECT_DIR
 from apps.keys.models import Key
+from apps.keys.functions import save_key
 import os
 
 
 class AddKeyForm(QtGui.QWidget):
 
-    def __init__(self):
+    def __init__(self, user):
         super(AddKeyForm,self).__init__()
+        self.user = user
         self.constructorUI()
 
     def constructorUI(self):
@@ -126,3 +128,24 @@ class AddKeyForm(QtGui.QWidget):
     def setConnector(self):
         self.btnCancel.clicked.connect(self.close)
         self.btnRandom.clicked.connect(self.set_generate_pass)
+        self.btnSave.clicked.connect(self.save)
+
+    def alert(self,title,mensaje):
+        QtGui.QMessageBox.about(self, title, mensaje)
+
+    def save(self):
+        key = Key()
+        key.user = self.user
+        key.name = self.txtName.text()
+        key.username = self.txtUsername.text()
+        key.email = self.txtEmail.text()
+        key.password = self.txtPassword.text()
+        key.webpage = self.txtWebpage.text()
+        key.notes = self.txtNotes.toPlainText()
+        success = save_key(key)
+        if not success:
+            self.alert("Error","Error al escribir los datos")
+            self.txtName.setFocus()
+        else:
+            self.close()
+
