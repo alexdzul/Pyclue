@@ -23,3 +23,4 @@ class Key(Model):
         chars = string.ascii_letters + str(random.random())
         password = ''.join(random.choice(chars) for _ in range(size))
         return password
+

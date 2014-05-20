@@ -11,9 +11,14 @@ import os
 
 class AddKeyForm(QtGui.QWidget):
 
-    def __init__(self, user):
+    def __init__(self, user, MainWindows):
+        """
+        user = Object User that is logged in
+        MainWindows = Main Windows that display all the keys
+        """
         super(AddKeyForm,self).__init__()
         self.user = user
+        self.Main = MainWindows
         self.constructorUI()
 
     def constructorUI(self):
@@ -147,5 +152,9 @@ class AddKeyForm(QtGui.QWidget):
             self.alert("Error","Error al escribir los datos")
             self.txtName.setFocus()
         else:
+            #Clear all the elements and then, refresh the list.
+            self.Main.clear_list_elements()
+            self.Main.set_list_elements()
+            # Close the windows.
             self.close()
 
