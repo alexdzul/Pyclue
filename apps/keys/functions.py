@@ -20,9 +20,19 @@ def delete_key(key):
     except:
         return False
 
+
 def update_key(key_obj, new_data_dict):
-    print new_data_dict['name']
-    return True
+    try:
+        key_obj.name =  new_data_dict['name']
+        key_obj.username = new_data_dict['username']
+        key_obj.email = new_data_dict['email']
+        key_obj.password = encrypt_password(new_data_dict['password'])
+        key_obj.notes = new_data_dict['notes']
+        key_obj.webpage = new_data_dict['webpage']
+        key_obj.save()
+        return key_obj
+    except:
+        return None
 
 """
 Returns keys objects.

@@ -165,14 +165,17 @@ class MainForm(QtGui.QMainWindow):
 
 
     def get_item_info(self):
-        item = self.listKeys.currentItem()
-        item = item.data(QtCore.Qt.UserRole).toPyObject()
-        self.txtNameKey.setText(item.name)
-        self.txtUsername.setText(item.username)
-        self.txtNotes.setText(item.notes)
-        self.txtPassword.setText(decode_password(item.password))
-        self.txtEmail.setText(item.email)
-        self.txtWebPage.setText(item.webpage)
+        try:
+            item = self.listKeys.currentItem()
+            item = item.data(QtCore.Qt.UserRole).toPyObject()
+            self.txtNameKey.setText(item.name)
+            self.txtUsername.setText(item.username)
+            self.txtNotes.setText(item.notes)
+            self.txtPassword.setText(decode_password(item.password))
+            self.txtEmail.setText(item.email)
+            self.txtWebPage.setText(item.webpage)
+        except:
+            pass
 
     def run(self):
         self.show()
@@ -246,18 +249,21 @@ class MainForm(QtGui.QMainWindow):
         self.listKeys.currentItemChanged.connect(self.get_item_info)
         self.btnViewPassword.pressed.connect(self.show_hide_password)
         self.btnDelete.pressed.connect(self.delete_element)
-        self.btnSave.pressed.connect(self.delete_element)
+        self.btnSave.pressed.connect(self.update_element)
         # Add  Signals to the toolBar elements
         self.connect(self.addKeyAction, QtCore.SIGNAL("triggered()"),self.show_add_key_form)
         self.connect(self.lockAction, QtCore.SIGNAL("triggered()"),self.hide_this_and_show_login)
 
     def clean_textbox_info(self):
-        self.txtNameKey.setText("")
-        self.txtPassword.setText("")
-        self.txtEmail.setText("")
-        self.txtNotes.setText("")
-        self.txtUsername.setText("")
-        self.txtWebPage.setText("")
+        try:
+            self.txtNameKey.setText("")
+            self.txtPassword.setText("")
+            self.txtEmail.setText("")
+            self.txtNotes.setText("")
+            self.txtUsername.setText("")
+            self.txtWebPage.setText("")
+        except:
+            pass
 
 
     def show_hide_password(self):
@@ -274,21 +280,22 @@ class MainForm(QtGui.QMainWindow):
             self.btnViewPassword.setText("View Pass")
 
     def update_element(self):
-        item = self.listKeys.currentItem()
-        item = item.data(QtCore.Qt.UserRole).toPyObject()
+        item_list = self.listKeys.currentItem()
+        key_object = item_list.data(QtCore.Qt.UserRole).toPyObject()
         new_data = {
             'name':self.txtNameKey.text(),
             'username': self.txtUsername.text(),
             'email':self.txtEmail.text(),
             'password':self.txtPassword.text(),
-            'notes':self.txtNotes.text(),
+            'notes':self.txtNotes.toPlainText(),
             'webpage':self.txtWebPage.text(),
         }
-        response = update_key(item,new_data)
-
-
-
-
+        item_updated = update_key(key_object, new_data)
+        if item_updated:
+            item_list.setText(item_updated.name)
+        else:
+            QtGui.QMessageBox.about(self, "Error",
+                                    "There was an error during updating")
 
 
     def delete_element(self):
@@ -301,8 +308,9 @@ class MainForm(QtGui.QMainWindow):
             item = self.listKeys.currentItem()
             item = item.data(QtCore.Qt.UserRole).toPyObject()
             response = delete_key(item)
+            self.clean_textbox_info()
             if response:
                 self.update_key_list()
-                self.clean_textbox_info()
             else:
-                QtGui.QMessageBox.about(self, "Error", "There was an error during deleting")
+                QtGui.QMessageBox.about(self, "Error",
+                                        "There was an error during deleting")
