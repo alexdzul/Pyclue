@@ -165,7 +165,6 @@ class MainForm(QtGui.QMainWindow):
 
 
     def get_item_info(self):
-        #text = self.listKeys.currentItem().text()
         item = self.listKeys.currentItem()
         item = item.data(QtCore.Qt.UserRole).toPyObject()
         self.txtNameKey.setText(item.name)
@@ -219,7 +218,6 @@ class MainForm(QtGui.QMainWindow):
 
     def set_list_elements(self):
         keys = get_user_keys(self.user)
-        i = 0
         for key in keys:
             item = QtGui.QListWidgetItem()
             item.setText(key.name)
@@ -240,12 +238,25 @@ class MainForm(QtGui.QMainWindow):
         self.close()
         self.loginForm.show()
 
+    def update_key_list(self):
+        self.clear_list_elements()
+        self.set_list_elements()
+
     def setConnectors(self):
         self.listKeys.currentItemChanged.connect(self.get_item_info)
         self.btnViewPassword.pressed.connect(self.show_hide_password)
+        self.btnDelete.pressed.connect(self.delete_element)
         # Add  Signals to the toolBar elements
         self.connect(self.addKeyAction, QtCore.SIGNAL("triggered()"),self.show_add_key_form)
         self.connect(self.lockAction, QtCore.SIGNAL("triggered()"),self.hide_this_and_show_login)
+
+    def clean_textbox_info(self):
+        self.txtNameKey.setText("")
+        self.txtPassword.setText("")
+        self.txtEmail.setText("")
+        self.txtNotes.setText("")
+        self.txtUsername.setText("")
+        self.txtWebPage.setText("")
 
 
     def show_hide_password(self):
@@ -260,3 +271,16 @@ class MainForm(QtGui.QMainWindow):
         else:
             self.txtPassword.setEchoMode(QtGui.QLineEdit.Password)
             self.btnViewPassword.setText("View Pass")
+
+    def delete_element(self):
+        reply = QtGui.QMessageBox.question(self,
+                                           'Deleting key',
+                "Are you sure to delete %s?" % self.txtNameKey.text(),
+                QtGui.QMessageBox.Yes,
+                QtGui.QMessageBox.No)
+        if reply == QtGui.QMessageBox.Yes:
+            item = self.listKeys.currentItem()
+            item = item.data(QtCore.Qt.UserRole).toPyObject()
+            item.delete_instance()
+            self.update_key_list()
+            self.clean_textbox_info()
