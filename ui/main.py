@@ -6,7 +6,7 @@ from PyQt4 import QtCore
 from generics.functions import Center, SetIcon
 from settings import RESOURCES_DIR
 from ui.keys import AddKeyForm
-from apps.keys.functions import get_user_keys
+from apps.keys.functions import get_user_keys, delete_key, update_key
 from apps.security.functions import decode_password
 
 class MainForm(QtGui.QMainWindow):
@@ -246,6 +246,7 @@ class MainForm(QtGui.QMainWindow):
         self.listKeys.currentItemChanged.connect(self.get_item_info)
         self.btnViewPassword.pressed.connect(self.show_hide_password)
         self.btnDelete.pressed.connect(self.delete_element)
+        self.btnSave.pressed.connect(self.delete_element)
         # Add  Signals to the toolBar elements
         self.connect(self.addKeyAction, QtCore.SIGNAL("triggered()"),self.show_add_key_form)
         self.connect(self.lockAction, QtCore.SIGNAL("triggered()"),self.hide_this_and_show_login)
@@ -272,6 +273,24 @@ class MainForm(QtGui.QMainWindow):
             self.txtPassword.setEchoMode(QtGui.QLineEdit.Password)
             self.btnViewPassword.setText("View Pass")
 
+    def update_element(self):
+        item = self.listKeys.currentItem()
+        item = item.data(QtCore.Qt.UserRole).toPyObject()
+        new_data = {
+            'name':self.txtNameKey.text(),
+            'username': self.txtUsername.text(),
+            'email':self.txtEmail.text(),
+            'password':self.txtPassword.text(),
+            'notes':self.txtNotes.text(),
+            'webpage':self.txtWebPage.text(),
+        }
+        response = update_key(item,new_data)
+
+
+
+
+
+
     def delete_element(self):
         reply = QtGui.QMessageBox.question(self,
                                            'Deleting key',
@@ -281,6 +300,9 @@ class MainForm(QtGui.QMainWindow):
         if reply == QtGui.QMessageBox.Yes:
             item = self.listKeys.currentItem()
             item = item.data(QtCore.Qt.UserRole).toPyObject()
-            item.delete_instance()
-            self.update_key_list()
-            self.clean_textbox_info()
+            response = delete_key(item)
+            if response:
+                self.update_key_list()
+                self.clean_textbox_info()
+            else:
+                QtGui.QMessageBox.about(self, "Error", "There was an error during deleting")

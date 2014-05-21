@@ -12,6 +12,18 @@ def save_key(key):
     except:
         return False
 
+
+def delete_key(key):
+    try:
+        key.delete_instance()
+        return True
+    except:
+        return False
+
+def update_key(key_obj, new_data_dict):
+    print new_data_dict['name']
+    return True
+
 """
 Returns keys objects.
 If return_list is True, the functions
