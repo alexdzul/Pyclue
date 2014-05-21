@@ -110,10 +110,14 @@ class MainForm(QtGui.QMainWindow):
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.btnDelete = QtGui.QPushButton(self.groupBox)
         self.btnDelete.setObjectName("btnDelete")
+        icon = QtGui.QIcon(self.get_delete_icon())
+        self.btnDelete.setIcon(icon)
         self.btnDelete.setText("Delete")
         self.horizontalLayout.addWidget(self.btnDelete)
         self.btnSave = QtGui.QPushButton(self.groupBox)
         self.btnSave.setObjectName("btnSave")
+        icon = QtGui.QIcon(self.get_update_icon())
+        self.btnSave.setIcon(icon)
         self.btnSave.setText("Save")
         self.horizontalLayout.addWidget(self.btnSave)
         self.gridLayout.addWidget(self.groupBox, 10, 0, 1, 1)
@@ -161,6 +165,16 @@ class MainForm(QtGui.QMainWindow):
         path =  os.path.abspath(os.path.join(RESOURCES_DIR,'main/img/%s'%img))
         return path
 
+    def get_delete_icon(self):
+        img = "delete.png"
+        path =  os.path.abspath(os.path.join(RESOURCES_DIR,'main/img/%s'%img))
+        return path
+
+    def get_update_icon(self):
+        img = "update.png"
+        path =  os.path.abspath(os.path.join(RESOURCES_DIR,'main/img/%s'%img))
+        return path
+
     def get_add_icon(self):
         img = "key_add.png"
         path =  os.path.abspath(os.path.join(RESOURCES_DIR,'main/img/%s'%img))
@@ -180,7 +194,6 @@ class MainForm(QtGui.QMainWindow):
             self.listKeys.addItem(item)
             item = self.listKeys.item(i)
             i = i + 1
-        print "list"
 
     def clear_list_elements(self):
         self.listKeys.clear()
