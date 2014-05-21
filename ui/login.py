@@ -16,7 +16,7 @@ class LoginForm(QtGui.QWidget):
     def constructorUI(self):
         self.drawUI()
         Center(self)
-        self.setConnector()
+        self.setConnectors()
         self.setFocusOrder()
 
     def run(self):
@@ -42,14 +42,18 @@ class LoginForm(QtGui.QWidget):
 
 
     def createMain(self,my_user):
-        self.main = MainForm(my_user)
+        loginForm = self
+        self.main = MainForm(my_user, loginForm)
+        self.txtPassword.setText("")
+        self.txtUser.setText("")
+        self.txtUser.setFocus()
         self.hide()
         self.main.run()
 
     def alert(self, title,  mensaje):
         QtGui.QMessageBox.about(self, title, mensaje)
 
-    def setConnector(self):
+    def setConnectors(self):
         self.btnExit.clicked.connect(self.exit)
         self.btnLogin.clicked.connect(self.validateCredential)
         self.txtPassword.returnPressed.connect(self.btnLogin.click)
