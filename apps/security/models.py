@@ -17,7 +17,7 @@ class User(Model):
     password = CharField()
 
     class Meta:
-        database = DB_NAME
+        database = SqliteDatabase(DB_NAME)
 
 
 

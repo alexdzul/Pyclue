@@ -24,12 +24,14 @@ def is_user(username):
     return user
 
 
-
 def user_exist_elements():
-    num_users = User.select().count()
-    if num_users >= 1:
-        return True
-    else:
+    try:
+        num_users = User.select().count()
+        if num_users >= 1:
+            return True
+        else:
+            return False
+    except:
         return False
 
 

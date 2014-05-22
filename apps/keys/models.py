@@ -17,7 +17,7 @@ class Key(Model):
     notes = TextField()
 
     class Meta:
-        database = DB_NAME
+        database = SqliteDatabase(DB_NAME)
 
     def generate_password(self,size=8):
         chars = string.ascii_letters + str(random.random())
