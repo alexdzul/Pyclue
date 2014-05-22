@@ -140,7 +140,7 @@ class MainForm(QtGui.QMainWindow):
         self.setCentralWidget(self.centralwidget)
         #===================== START ToolBar =========================================
         # Add the Lock Button
-        self.lockAction = QtGui.QAction(QtGui.QIcon(self.get_locked_icon()),'Locked',self)
+        self.lockAction = QtGui.QAction(QtGui.QIcon(self.get_locked_icon()),'Lock the Windows',self)
         self.lockAction.setShortcut('Ctrl+L')
         # Add the Exit Button
         self.exitAction = QtGui.QAction(QtGui.QIcon(self.get_exit_icon()),'Exit',self)
@@ -152,10 +152,15 @@ class MainForm(QtGui.QMainWindow):
         # Add the Settings Button
         self.settingsAction = QtGui.QAction(QtGui.QIcon(self.get_settings_icon()),'Settings',self)
         self.settingsAction.setShortcut('Ctrl+S')
+        # Add the Add User Button
+        self.addUserAction = QtGui.QAction(QtGui.QIcon(self.get_add_user_icon()),'Add User',self)
+        self.addUserAction.setShortcut('Ctrl+U')
         # Create toolBar Element
         self.toolBar = self.addToolBar('Main')
         # Add the elements to the toolBar
         self.toolBar.addAction(self.addKeyAction)
+        self.toolBar.addAction(self.addUserAction)
+        self.toolBar.addSeparator()
         self.toolBar.addAction(self.settingsAction)
         self.toolBar.addAction(self.lockAction)
         self.toolBar.addAction(self.exitAction)
@@ -184,6 +189,11 @@ class MainForm(QtGui.QMainWindow):
 
     def get_exit_icon(self):
         img = "quit.png"
+        path =  os.path.abspath(os.path.join(RESOURCES_DIR,'main/img/%s'%img))
+        return path
+
+    def get_add_user_icon(self):
+        img = "addUser.png"
         path =  os.path.abspath(os.path.join(RESOURCES_DIR,'main/img/%s'%img))
         return path
 
