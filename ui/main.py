@@ -32,15 +32,13 @@ class MainForm(QtGui.QMainWindow):
     def drawUI(self):
         # Nombre de la ventana
         self.setWindowTitle('Keys Python')
-        self.resize(700, 511)
-        self.setMinimumSize(QtCore.QSize(569, 511))
-        self.setMaximumSize(QtCore.QSize(700, 700))
+        # Windows Size
+        self.resize(400, 472)
+        self.setMinimumSize(QtCore.QSize(400, 472))
+        self.setMaximumSize(QtCore.QSize(569, 511))
         # Status Bar
         message = "Welcome: %s %s" % (self.user.first_name,self.user.last_name)
         self.statusBar().showMessage(message)
-        # Windows Size
-        self.setMinimumSize(700,700)
-        self.setGeometry(300,300,450,400)
         self.centralwidget = QtGui.QWidget(self)
         SetIcon(self)
         # Set the grid to show de keys list
