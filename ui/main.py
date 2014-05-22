@@ -164,6 +164,7 @@ class MainForm(QtGui.QMainWindow):
 
     def get_item_info(self):
         try:
+            self.hide_password()
             item = self.listKeys.currentItem()
             item = item.data(QtCore.Qt.UserRole).toPyObject()
             self.txtNameKey.setText(item.name)
@@ -263,6 +264,13 @@ class MainForm(QtGui.QMainWindow):
         except:
             pass
 
+    def hide_password(self):
+        self.btnViewPassword.setText("View Pass")
+        self.txtPassword.setEchoMode(QtGui.QLineEdit.Password)
+
+    def show_password(self):
+        self.btnViewPassword.setText("Hide Pass")
+        self.txtPassword.setEchoMode(QtGui.QLineEdit.Normal)
 
     def show_hide_password(self):
         """
@@ -271,11 +279,9 @@ class MainForm(QtGui.QMainWindow):
         """
         text_button = self.btnViewPassword.text()
         if text_button == "View Pass":
-            self.txtPassword.setEchoMode(QtGui.QLineEdit.Normal)
-            self.btnViewPassword.setText("Hide Pass")
+            self.show_password()
         else:
-            self.txtPassword.setEchoMode(QtGui.QLineEdit.Password)
-            self.btnViewPassword.setText("View Pass")
+            self.hide_password()
 
     def update_element(self):
         item_list = self.listKeys.currentItem()
@@ -291,6 +297,7 @@ class MainForm(QtGui.QMainWindow):
         item_updated = update_key(key_object, new_data)
         if item_updated:
             item_list.setText(item_updated.name)
+            self.show_hide_password()
         else:
             QtGui.QMessageBox.about(self, "Error",
                                     "There was an error during updating")
