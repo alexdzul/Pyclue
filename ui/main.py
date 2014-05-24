@@ -128,6 +128,7 @@ class MainForm(QtGui.QMainWindow):
         icon = QtGui.QIcon(self.get_delete_icon())
         self.btnDelete.setIcon(icon)
         self.btnDelete.setText("Delete")
+        self.btnDelete.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.horizontalLayout.addWidget(self.btnDelete)
         #Add the Save Button ============================
         self.btnSave = QtGui.QPushButton(self.groupBox)
@@ -135,6 +136,7 @@ class MainForm(QtGui.QMainWindow):
         icon = QtGui.QIcon(self.get_update_icon())
         self.btnSave.setIcon(icon)
         self.btnSave.setText("Save")
+        self.btnSave.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.horizontalLayout.addWidget(self.btnSave)
         self.gridLayout.addWidget(self.groupBox, 12, 0, 1, 1)
         self.gridLayout_2.addWidget(self.gbInformation, 0, 1, 1, 1)
