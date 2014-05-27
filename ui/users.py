@@ -2,8 +2,8 @@
 __author__ = 'alex'
 from PyQt4 import QtGui
 from PyQt4 import QtCore
-from generics.functions import Center, SetIcon
-from apps.security.functions import create_user
+from generics.functions import Center, SetIcon, alert
+from apps.security.functions import create_user, get_user
 import os
 from settings import RESOURCES_DIR
 
@@ -116,9 +116,6 @@ class AddUserForm(QtGui.QWidget):
         path =  os.path.abspath(os.path.join(RESOURCES_DIR,'img/%s'%img))
         return path
 
-    def alert(self, title,  mensaje):
-        QtGui.QMessageBox.about(self, title, mensaje)
-
     def construct_get_data(self):
         self.first_name = self.txtFirstName.text()
         self.last_name = self.txtLastName.text()
@@ -129,18 +126,23 @@ class AddUserForm(QtGui.QWidget):
     def save_user(self):
         self.construct_get_data()
         if self.password_one == self.password_two :
-            user = create_user(self.first_name,
-                        self.last_name,
-                        self.username,
-                        self.password_one)
-            if user:
-
-                self.alert("Great!","User save correctly!")
-                self.close()
+            user_exist = get_user(self.username)
+            if user_exist:
+                alert(self,"Info","This username is taken!, Try another one")
+                self.txtUsername.setFocus()
+                self.txtUsername.selectAll()
             else:
-                self.alert("Error!","Something was wrong! Try again.")
+                user = create_user(self.first_name,
+                            self.last_name,
+                            self.username,
+                            self.password_one)
+                if user:
+                    alert(self, "Great!","User save correctly!")
+                    self.close()
+                else:
+                    alert(self, "Error!","Something was wrong! Try again.")
         else:
-            self.alert("Error","Password doesn't match")
+            alert(self, "Error","Password doesn't match")
             self.txtUsername.setFocus()
 
     def setConnectors(self):

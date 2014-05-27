@@ -2,7 +2,7 @@
 __author__ = 'alex'
 from PyQt4 import QtGui
 from PyQt4 import QtCore
-from ui.generics.functions import Center
+from ui.generics.functions import Center, alert
 from settings import PROJECT_DIR
 from apps.keys.models import Key
 from apps.keys.functions import save_key
@@ -138,9 +138,6 @@ class AddKeyForm(QtGui.QWidget):
         self.btnRandom.clicked.connect(self.set_generate_pass)
         self.btnSave.clicked.connect(self.save)
 
-    def alert(self,title,mensaje):
-        QtGui.QMessageBox.about(self, title, mensaje)
-
     def save(self):
         key = Key()
         key.user = self.user
@@ -152,7 +149,7 @@ class AddKeyForm(QtGui.QWidget):
         key.notes = self.txtNotes.toPlainText()
         success = save_key(key)
         if not success:
-            self.alert("Error","Error al escribir los datos")
+            alert(self, "Error","Error al escribir los datos")
             self.txtName.setFocus()
         else:
             #Clear all the elements and then, refresh the list.
