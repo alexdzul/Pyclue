@@ -19,7 +19,5 @@ class User(Model):
     class Meta:
         database = SqliteDatabase(DB_NAME)
 
-
-
-
-
+class Settings(Model):
+    pass

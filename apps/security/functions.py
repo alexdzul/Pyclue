@@ -43,9 +43,9 @@ def create_user(first_name, last_name, username, password):
                     username = username,
                     password=new_password)
         user.save()
-        return True
+        return user
     except:
-        return False
+        return None
 
 
 def get_user(username):
@@ -54,3 +54,6 @@ def get_user(username):
     except:
         user = None
     return user
+
+def create_user_settings(user):
+    pass

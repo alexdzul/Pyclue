@@ -129,11 +129,12 @@ class AddUserForm(QtGui.QWidget):
     def save_user(self):
         self.construct_get_data()
         if self.password_one == self.password_two :
-            response = create_user(self.first_name,
+            user = create_user(self.first_name,
                         self.last_name,
                         self.username,
                         self.password_one)
-            if response:
+            if user:
+
                 self.alert("Great!","User save correctly!")
                 self.close()
             else:
