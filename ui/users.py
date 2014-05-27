@@ -3,6 +3,7 @@ __author__ = 'alex'
 from PyQt4 import QtGui
 from PyQt4 import QtCore
 from generics.functions import Center, SetIcon
+from apps.security.functions import create_user
 import os
 from settings import RESOURCES_DIR
 
@@ -15,6 +16,7 @@ class AddUserForm(QtGui.QWidget):
 
     def constructorUI(self):
         self.drawUI()
+        self.setConnectors()
         SetIcon(self)
         Center(self)
 
@@ -49,20 +51,27 @@ class AddUserForm(QtGui.QWidget):
         self.gbLoginData.setObjectName("gbLoginData")
         self.gridLayout_2 = QtGui.QGridLayout(self.gbLoginData)
         self.gridLayout_2.setObjectName("gridLayout_2")
+        self.lblUsername = QtGui.QLabel(self.gbLoginData)
+        self.lblUsername.setObjectName("lblUsername")
+        self.lblUsername.setText("Username:")
+        self.gridLayout_2.addWidget(self.lblUsername, 0, 0, 1, 1)
+        self.txtUsername = QtGui.QLineEdit(self.gbLoginData)
+        self.txtUsername.setObjectName("txtUsername")
+        self.gridLayout_2.addWidget(self.txtUsername, 0, 1, 1, 1)
         self.lblPassword = QtGui.QLabel(self.gbLoginData)
         self.lblPassword.setObjectName("lblPassword")
         self.lblPassword.setText("Password:")
-        self.gridLayout_2.addWidget(self.lblPassword, 0, 0, 1, 1)
+        self.gridLayout_2.addWidget(self.lblPassword, 1, 0, 1, 1)
         self.txtPassword = QtGui.QLineEdit(self.gbLoginData)
         self.txtPassword.setObjectName("txtPassword")
-        self.gridLayout_2.addWidget(self.txtPassword, 0, 1, 1, 1)
+        self.gridLayout_2.addWidget(self.txtPassword, 1, 1, 1, 1)
         self.txtConfirmPassword = QtGui.QLineEdit(self.gbLoginData)
         self.txtConfirmPassword.setObjectName("txtConfirmPassword")
-        self.gridLayout_2.addWidget(self.txtConfirmPassword, 1, 1, 1, 1)
+        self.gridLayout_2.addWidget(self.txtConfirmPassword, 2, 1, 1, 1)
         self.lblConfirmPassword = QtGui.QLabel(self.gbLoginData)
         self.lblConfirmPassword.setObjectName("lblConfirmPassword")
         self.lblConfirmPassword.setText("Confirm Password:")
-        self.gridLayout_2.addWidget(self.lblConfirmPassword, 1, 0, 1, 1)
+        self.gridLayout_2.addWidget(self.lblConfirmPassword, 2, 0, 1, 1)
         self.gridLayout.addWidget(self.gbLoginData, 1, 0, 1, 1)
         self.splitter = QtGui.QSplitter(self)
         self.splitter.setOrientation(QtCore.Qt.Horizontal)
@@ -106,3 +115,33 @@ class AddUserForm(QtGui.QWidget):
         img = "cancel.png"
         path =  os.path.abspath(os.path.join(RESOURCES_DIR,'img/%s'%img))
         return path
+
+    def alert(self, title,  mensaje):
+        QtGui.QMessageBox.about(self, title, mensaje)
+
+    def construct_get_data(self):
+        self.first_name = self.txtFirstName.text()
+        self.last_name = self.txtLastName.text()
+        self.password_one = self.txtPassword.text()
+        self.password_two = self.txtConfirmPassword.text()
+        self.username = self.txtUsername.text()
+
+    def save_user(self):
+        self.construct_get_data()
+        if self.password_one == self.password_two :
+            response = create_user(self.first_name,
+                        self.last_name,
+                        self.username,
+                        self.password_one)
+            if response:
+                self.alert("Great!","User save correctly!")
+                self.close()
+            else:
+                self.alert("Error!","Something was wrong! Try again.")
+        else:
+            self.alert("Error","Password doesn't match")
+            self.txtUsername.setFocus()
+
+    def setConnectors(self):
+        QtCore.QObject.connect(self.btnCancel, QtCore.SIGNAL("clicked()"), self.close)
+        self.btnSave.clicked.connect(self.save_user)
