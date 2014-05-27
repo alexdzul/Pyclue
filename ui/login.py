@@ -77,7 +77,9 @@ class LoginForm(QtGui.QWidget):
         self.txtPassword = QtGui.QLineEdit()
         self.txtPassword.setEchoMode(2)
         self.btnLogin = QtGui.QPushButton('Login', self)
+        self.btnLogin.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.btnExit = QtGui.QPushButton('Exit', self)
+        self.btnExit.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         # Configure the elements in the grid
         grid = QtGui.QGridLayout()
         grid.addWidget(lblUser,0,0,1,1)

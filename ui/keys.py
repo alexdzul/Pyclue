@@ -90,6 +90,7 @@ class AddKeyForm(QtGui.QWidget):
         self.btnRandom = QtGui.QPushButton(self.gbInfo)
         self.btnRandom.setObjectName("btnRandom")
         self.btnRandom.setText("Random")
+        self.btnRandom.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         icon = QtGui.QIcon(self.get_icon_random_btn())
         self.btnRandom.setIcon(icon)
         self.gridLayout_gbInfo.addWidget(self.btnRandom, 4, 2, 1, 1)
@@ -108,10 +109,12 @@ class AddKeyForm(QtGui.QWidget):
         self.btnSave = QtGui.QPushButton(self)
         self.btnSave.setObjectName("btnSave")
         self.btnSave.setText("Save")
+        self.btnSave.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.verticalLayout.addWidget(self.btnSave)
         self.btnCancel = QtGui.QPushButton(self)
         self.btnCancel.setObjectName("btnCancel")
         self.btnCancel.setText("Cancel")
+        self.btnCancel.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.verticalLayout.addWidget(self.btnCancel)
 
     def set_icon(self):

@@ -102,6 +102,7 @@ class MainForm(QtGui.QMainWindow):
         self.horizontalLayout_2.addWidget(self.txtPassword)
         # Set the Button View Password and added into a grid element
         self.btnViewPassword = QtGui.QPushButton(self.gbInformation)
+        self.btnViewPassword.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.btnViewPassword.setObjectName("btnViewPassword")
         self.btnViewPassword.setText("View Pass")
         icon = QtGui.QIcon(self.get_view_pass_icon())
