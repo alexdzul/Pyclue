@@ -7,6 +7,7 @@ from generics.functions import Center, SetIcon
 from settings import RESOURCES_DIR
 from ui.keys import AddKeyForm
 from ui.users import AddUserForm
+from ui.appSetting import AppSettingsForm
 from apps.keys.functions import get_user_keys, delete_key, update_key
 from apps.security.functions import decode_password
 
@@ -262,6 +263,10 @@ class MainForm(QtGui.QMainWindow):
         self.addUser = AddUserForm()
         self.addUser.run()
 
+    def show_appSettings_form(self):
+        self.appSett = AppSettingsForm(self.user, self)
+        self.appSett.run()
+
     def setConnectors(self):
         self.listKeys.currentItemChanged.connect(self.get_item_info)
         self.btnViewPassword.pressed.connect(self.show_hide_password)
@@ -271,6 +276,7 @@ class MainForm(QtGui.QMainWindow):
         self.connect(self.addKeyAction, QtCore.SIGNAL("triggered()"),self.show_add_key_form)
         self.connect(self.lockAction, QtCore.SIGNAL("triggered()"),self.hide_this_and_show_login)
         self.connect(self.addUserAction, QtCore.SIGNAL("triggered()"),self.show_add_user_form)
+        self.connect(self.settingsAction, QtCore.SIGNAL("triggered()"),self.show_appSettings_form)
 
     def clean_textbox_info(self):
         try:
