@@ -3,7 +3,8 @@ __author__ = 'alex'
 from PyQt4 import QtGui
 from PyQt4 import QtCore
 from pyclue.appSettings import RESOURCES_DIR, ABOUT_MESSAGE
-from pyclue.ui.generics.functions import SetIcon
+from pyclue.ui.generics.functions import SetIcon, alert
+from pyclue.apps.settings.functions import save_settings, get_settings
 import os
 
 
@@ -117,9 +118,9 @@ class AppSettingsForm(QtGui.QWidget):
         self.txtStorePath = QtGui.QLineEdit(self.gbStoreSettings)
         self.txtStorePath.setObjectName("txtStorePath")
         self.gridLayout_5.addWidget(self.txtStorePath, 0, 0, 1, 5)
-        self.sbNumDays = QtGui.QSpinBox(self.gbStoreSettings)
-        self.sbNumDays.setObjectName("sbNumDays")
-        self.gridLayout_5.addWidget(self.sbNumDays, 1, 1, 1, 1)
+        self.sbNumFiles = QtGui.QSpinBox(self.gbStoreSettings)
+        self.sbNumFiles.setObjectName("sbNumFiles")
+        self.gridLayout_5.addWidget(self.sbNumFiles, 1, 1, 1, 1)
         self.gridLayout.addWidget(self.gbStoreSettings, 1, 0, 1, 1)
         self.gbFile = QtGui.QGroupBox(self.tabBackup)
         self.gbFile.setObjectName("gbFile")
@@ -205,8 +206,8 @@ class AppSettingsForm(QtGui.QWidget):
     def fill_data(self):
         self.txtFullName.setText(self.settings.user_fullName)
         self.checkNoBackup.setChecked(self.settings.deactivate_backup)
-        self.sbNumDays.setValue(int(self.settings.num_files_store))
-        self.sbNumDays.setMinimum(1)
+        self.sbNumFiles.setValue(int(self.settings.num_files_store))
+        self.sbNumFiles.setMinimum(1)
         if self.settings.path_store: # If it has path
             self.txtStorePath.setText(self.settings.path_store)
         self.txtFileName.setText(self.settings.file_name_backup)
@@ -224,25 +225,32 @@ class AppSettingsForm(QtGui.QWidget):
         self.StorePath = self.txtStorePath.text()
         self.FileName = self.txtFileName.text()
         self.NoBackup = self.checkNoBackup.isChecked()
-        self.StoreNumber = self.sbNumDays.text()
+        self.NumFiles = self.sbNumFiles.text()
         self.Periodicity = self.cmbPeriodicity.currentText()
-        print self.FullName
-        print self.CurrentPass
-        print self.password_1
-        print self.password_2
-        print self.StorePath
-        print self.FileName
-        print self.NoBackup
-        print self.StoreNumber
-        print self.Periodicity
 
 
+    def save_settings(self):
+        self.get_form_data()
+        if self.password_1 == self.password_2:
+            if self.password_1 == "":
+                success = save_settings(self.Periodicity,self.NoBackup, self.StorePath,
+                          self.NumFiles, self.FileName,self.FullName,self.password_1)
+            else:
+                success = save_settings(self.Periodicity,self.NoBackup, self.StorePath,
+                          self.NumFiles, self.FileName,self.FullName)
+            if success:
+                self.close()
+                self.Main.load_settings()
+            else:
+                alert(self,"Error","There was an error saving data...")
+        else:
+            alert(self,"Info","Passwords don't match.")
 
 
     def setConnectors(self):
         self.btnFileBrowser.pressed.connect(self.openDialog)
         self.btnCancel.pressed.connect(self.close)
-        self.btnSaveMyAccount.pressed.connect(self.get_form_data)
+        self.btnSaveMyAccount.pressed.connect(self.save_settings)
 
 
     def openDialog(self):

@@ -55,3 +55,26 @@ def get_settings():
         return set
     except:
         return None
+
+
+
+def save_settings(period_backup, deactivate_backup, path_store,
+                  num_files_store, file_name_backup,
+                  user_fullName, user_password=None):
+    try:
+        my_set = get_settings()
+        if my_set:
+            my_set.period_backup = period_backup
+            my_set.deactivate_backup = deactivate_backup
+            my_set.path_store = path_store
+            my_set.num_files_store = num_files_store
+            my_set.file_name_backup = file_name_backup
+            my_set.user_fullName = user_fullName
+            if user_password: # Si se envia un password
+                my_set.user_password = encrypt_password(user_password)
+            my_set.save()
+            return True
+        else:
+            return False
+    except:
+        return False

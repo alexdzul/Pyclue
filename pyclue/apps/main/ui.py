@@ -6,7 +6,7 @@ from PyQt4 import QtCore
 from pyclue.appSettings import RESOURCES_DIR
 from pyclue.appSettings import WELCOME_MESSAGE
 from pyclue.ui.generics.functions import Center,SetIcon
-from pyclue.apps.settings.functions import create_settings
+from pyclue.apps.settings.functions import create_settings, get_settings
 from pyclue.apps.keys.functions import get_keys, delete_key, update_key
 from pyclue.apps.keys.ui import AddKeyForm
 from pyclue.apps.security.functions import decode_password
@@ -497,6 +497,10 @@ class MainForm(QtGui.QMainWindow):
         else:
             QtGui.QMessageBox.about(self, "Error",
                                     "There was an error during updating")
+
+    def load_settings(self):
+        self.settings = get_settings()
+        self.set_statusBar("Welcome "+self.settings.user_fullName)
 
 
     def delete_element(self):
