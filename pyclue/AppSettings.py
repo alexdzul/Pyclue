@@ -9,6 +9,8 @@ APP_ICON = os.path.join(RESOURCES_DIR,'img/key.ico')
 DB_NAME = 'pyclue/pyclue.db'
 
 
+VERSION = "0.1"
+
 
 WELCOME_MESSAGE = "Before starting using this application, " \
                   "it is necessary that you enter some basic " \
@@ -20,7 +22,7 @@ ABOUT_MESSAGE = "<html><head/><body><p><span style=\" font-size:12pt; font-weigh
                 "</p><p><span style=\" font-size:12pt; font-weight:600;\">Author.</span></p><p>Alex Dzul. Twitter: " \
                 "<a href=\"http://www.twitter.com/alexjs88\"><span style=\" text-decoration: underline; color:#0000ff;\">" \
                 "@alexjs88</span></a></p><p><span style=\" font-size:12pt; font-weight:600;\">Licence.</span></p><p>" \
-                "This software is under the GPL v2 terms.</p><p>Copyright (C) 2014</p><p><span style=\" font-size:12pt; " \
+                "This software is under the GPL v2 terms.</p><p>Copyright (C) 2014, version."+ VERSION +"</p><p><span style=\" font-size:12pt; " \
                 "font-weight:600;\">Github.</span></p><p>View the code on <a href=\"https://github.com/alexdzul/Pyclue\">" \
                 "<span style=\" text-decoration: underline; color:#0000ff;\">https://github.com/alexdzul/Pyclue</span></a>" \
                 "<br/></p></body></html>"
