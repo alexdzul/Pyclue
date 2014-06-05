@@ -2,9 +2,9 @@
 __author__ = 'alex'
 from PyQt4 import QtGui
 from PyQt4 import QtCore
-from pyclue.appSettings import RESOURCES_DIR, ABOUT_MESSAGE
-from pyclue.ui.generics.functions import SetIcon, alert
-from pyclue.apps.settings.functions import save_settings, get_settings
+from pyclue.appSettings import RESOURCES_DIR, ABOUT_MESSAGE, OS_RUNING
+from pyclue.ui.generics.functions import SetIcon, alert, Center
+from pyclue.apps.settings.functions import save_settings
 import os
 
 
@@ -22,14 +22,20 @@ class AppSettingsForm(QtGui.QWidget):
     def constructorUI(self):
         self.drawUI()
         SetIcon(self)
+        Center(self)
         self.fill_data()
         self.setConnectors()
         self.setTextElements()
 
     def drawUI(self):
         self.setObjectName("SettingsForm")
-        self.resize(386, 363)
-        self.setMinimumSize(QtCore.QSize(386, 363))
+        print OS_RUNING
+        if OS_RUNING == "linux2":
+            self.resize(386, 400)
+            self.setMinimumSize(QtCore.QSize(386, 400))
+        else:
+            self.resize(386, 363)
+            self.setMinimumSize(QtCore.QSize(386, 363))
         self.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
         self.setWindowOpacity(1.0)
         self.setWhatsThis("")
