@@ -2,6 +2,7 @@
 __author__ = 'alex'
 import base64, sys
 from pyclue.apps.settings.models import MainSettings
+from pyclue.appSettings import VERSION
 
 
 def encrypt_password(pw):
@@ -24,9 +25,10 @@ def create_settings(user_fullName, user_password):
         main.user_password = encrypt_password(user_password)
         #Default first settings
         main.period_backup = "Weekly"
-        main.activate_backup = True
+        main.deactivate_backup = False
         main.num_files_store = 3
         main.file_name_backup = "keys_DD-MM-YY.bak"
+        main.version = VERSION
         main.save()
         return True
     except:

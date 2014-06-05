@@ -436,7 +436,7 @@ class MainForm(QtGui.QMainWindow):
         self.set_list_elements()
 
     def show_appSettings_form(self):
-        self.appSett = AppSettingsForm(self)
+        self.appSett = AppSettingsForm(self.settings,self)
         self.appSett.run()
 
     def setConnectors(self):

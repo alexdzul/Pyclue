@@ -41,8 +41,8 @@ class LoginForm(QtGui.QWidget):
                 self.alert("Error","Incorrect password")
                 self.txtMasterPassword.setFocus()
         else:
-            self.alert("Error","User does not exist")
-            self.txtUser.setFocus()
+            self.alert("Error","Error reading the main settings")
+            self.txtMasterPassword.setFocus()
 
 
     def createMain(self,settings):
