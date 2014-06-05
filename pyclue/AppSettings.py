@@ -10,6 +10,7 @@ AUTHOR_EMAIL = "alexexc2@gmail.com"
 LICENCE = "GPL v2"
 
 
+
 PROJECT_DIR = os.path.dirname(__file__)
 RESOURCES_DIR = os.path.join(PROJECT_DIR,'resources')
 APP_ICON = os.path.join(RESOURCES_DIR,'img/key.ico')
