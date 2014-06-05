@@ -3,13 +3,20 @@ __author__ = 'alex'
 from peewee import SqliteDatabase
 import os
 
+SOFTWARE_NAME = "Pyclue"
+VERSION = "0.1"
+AUTHOR = "Alex Dzul"
+AUTHOR_EMAIL = "alexexc2@gmail.com"
+LICENCE = "GPL v2"
+
+
 PROJECT_DIR = os.path.dirname(__file__)
 RESOURCES_DIR = os.path.join(PROJECT_DIR,'resources')
 APP_ICON = os.path.join(RESOURCES_DIR,'img/key.ico')
 DB_NAME = 'pyclue/pyclue.db'
 
 
-VERSION = "0.1"
+
 
 
 WELCOME_MESSAGE = "Before starting using this application, " \
