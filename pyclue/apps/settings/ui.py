@@ -188,7 +188,7 @@ class AppSettingsForm(QtGui.QWidget):
         self.setWindowTitle("Settings")
         self.lblAbout.setText(ABOUT_MESSAGE)
         self.lblCurrentPass.setText("Current Password:")
-        self.lblFormatDate.setText("_DD-MM-YY.bak")
+        self.lblFormatDate.setText(self.settings.file_name_sufix_backup)
         self.lblFullName.setText("Full Name:")
         self.lblNewPass.setText("New Password:")
         self.lblTypeAgainPass.setText("Type Again:")
@@ -215,9 +215,34 @@ class AppSettingsForm(QtGui.QWidget):
         self.cmbPeriodicity.setCurrentIndex(index)
 
 
+
+    def get_form_data(self):
+        self.FullName = self.txtFullName.text()
+        self.CurrentPass = self.txtCurrentPass.text()
+        self.password_1 = self.txtNewPass.text()
+        self.password_2 = self.txtTypeAgainPass.text()
+        self.StorePath = self.txtStorePath.text()
+        self.FileName = self.txtFileName.text()
+        self.NoBackup = self.checkNoBackup.isChecked()
+        self.StoreNumber = self.sbNumDays.text()
+        self.Periodicity = self.cmbPeriodicity.currentText()
+        print self.FullName
+        print self.CurrentPass
+        print self.password_1
+        print self.password_2
+        print self.StorePath
+        print self.FileName
+        print self.NoBackup
+        print self.StoreNumber
+        print self.Periodicity
+
+
+
+
     def setConnectors(self):
         self.btnFileBrowser.pressed.connect(self.openDialog)
         self.btnCancel.pressed.connect(self.close)
+        self.btnSaveMyAccount.pressed.connect(self.get_form_data)
 
 
     def openDialog(self):

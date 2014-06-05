@@ -27,7 +27,8 @@ def create_settings(user_fullName, user_password):
         main.period_backup = "Weekly"
         main.deactivate_backup = False
         main.num_files_store = 3
-        main.file_name_backup = "keys_DD-MM-YY.bak"
+        main.file_name_backup = "keys"
+        main.file_name_sufix_backup = "_DD-MM-YY.bak"
         main.version = VERSION
         main.save()
         return True
