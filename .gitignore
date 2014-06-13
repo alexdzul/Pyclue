@@ -63,3 +63,4 @@ pyclue.db
 pyclue/pyclue.db
 pyclue/*.db
 *.db
+pyclue/pyclue.db
