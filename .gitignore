@@ -55,3 +55,9 @@ docs/_build/
 #PyCharm files
 .idea/
 pyclue/.idea/
+
+#Exclude DB pyclue
+*.db
+.db
+pyclue.db
+pyclue/pyclue.db
