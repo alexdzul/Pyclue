@@ -3,7 +3,7 @@ __author__ = 'alex'
 import os
 from PyQt4 import QtGui
 from PyQt4 import QtCore
-from pyclue.apps.main.ui import MainForm
+from pyclue.apps.main.ui.forms import MainForm
 from pyclue.appSettings import RESOURCES_DIR
 from pyclue.ui.generics.functions import Center, SetIcon
 from pyclue.apps.security.functions import decode_password

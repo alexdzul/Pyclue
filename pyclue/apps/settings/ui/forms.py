@@ -2,11 +2,12 @@
 __author__ = 'alex'
 from PyQt4 import QtGui
 from PyQt4 import QtCore
-from pyclue.appSettings import RESOURCES_DIR, ABOUT_MESSAGE, OS_RUNING
+
+from pyclue.appSettings import ABOUT_MESSAGE
 from pyclue.ui.generics.functions import SetIcon, alert, Center
 from pyclue.apps.settings.functions import save_settings
-import os
-
+from pyclue.apps.settings.ui.resources_mapper import get_exit_icon, get_folder_icon, get_save_info_icon
+from pyclue.apps.settings.ui.ui_sizes import get_size
 
 class AppSettingsForm(QtGui.QWidget):
 
@@ -29,13 +30,7 @@ class AppSettingsForm(QtGui.QWidget):
 
     def drawUI(self):
         self.setObjectName("SettingsForm")
-        print OS_RUNING
-        if OS_RUNING == "linux2":
-            self.resize(386, 400)
-            self.setMinimumSize(QtCore.QSize(386, 400))
-        else:
-            self.resize(386, 363)
-            self.setMinimumSize(QtCore.QSize(386, 363))
+        get_size(self) # Dibujamos con el mejor tamaño
         self.setContextMenuPolicy(QtCore.Qt.DefaultContextMenu)
         self.setWindowOpacity(1.0)
         self.setWhatsThis("")
@@ -113,7 +108,7 @@ class AppSettingsForm(QtGui.QWidget):
         self.gridLayout_5.addWidget(self.lblFiles, 1, 2, 1, 1)
         self.btnFileBrowser = QtGui.QPushButton(self.gbStoreSettings)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(self.get_folder_icon()), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap(get_folder_icon()), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btnFileBrowser.setIcon(icon)
         self.btnFileBrowser.setIconSize(QtCore.QSize(25, 25))
         self.btnFileBrowser.setObjectName("btnFileBrowser")
@@ -157,7 +152,7 @@ class AppSettingsForm(QtGui.QWidget):
         self.btnSaveMyAccount = QtGui.QPushButton(self)
         self.btnSaveMyAccount.setText("")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap(self.get_save_info_icon()), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon1.addPixmap(QtGui.QPixmap(get_save_info_icon()), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btnSaveMyAccount.setIcon(icon1)
         self.btnSaveMyAccount.setIconSize(QtCore.QSize(40, 40))
         self.btnSaveMyAccount.setObjectName("btnSaveMyAccount")
@@ -165,7 +160,7 @@ class AppSettingsForm(QtGui.QWidget):
         self.btnCancel = QtGui.QPushButton(self)
         self.btnCancel.setText("")
         icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap(self.get_exit_icon()), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon2.addPixmap(QtGui.QPixmap(get_exit_icon()), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btnCancel.setIcon(icon2)
         self.btnCancel.setIconSize(QtCore.QSize(40, 40))
         self.btnCancel.setObjectName("btnCancel")
@@ -175,20 +170,7 @@ class AppSettingsForm(QtGui.QWidget):
     def run(self):
         self.show()
 
-    def get_save_info_icon(self):
-        img = "Save.png"
-        path =  os.path.abspath(os.path.join(RESOURCES_DIR,'settings/%s'%img))
-        return path
 
-    def get_folder_icon(self):
-        img = "folder.png"
-        path =  os.path.abspath(os.path.join(RESOURCES_DIR,'settings/%s'%img))
-        return path
-
-    def get_exit_icon(self):
-        img = "cancel.png"
-        path =  os.path.abspath(os.path.join(RESOURCES_DIR,'img/%s'%img))
-        return path
 
     def setTextElements(self):
         self.lblFileName.setText("File Name:")

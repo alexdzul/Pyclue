@@ -2,7 +2,7 @@
 import sys
 from PyQt4 import QtGui
 from pyclue.apps.security.ui import LoginForm
-from pyclue.apps.main.ui import LaunchForm
+from pyclue.apps.main.ui.forms import LaunchForm
 from pyclue.apps.database.functions import create_db
 from pyclue.apps.settings.functions import settings_exist
 

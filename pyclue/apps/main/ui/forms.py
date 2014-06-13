@@ -3,14 +3,16 @@ __author__ = 'alex'
 import os
 from PyQt4 import QtGui
 from PyQt4 import QtCore
-from pyclue.appSettings import RESOURCES_DIR
+from pyclue.apps.main.ui.resources_mapper import *
 from pyclue.appSettings import WELCOME_MESSAGE
 from pyclue.ui.generics.functions import Center,SetIcon
 from pyclue.apps.settings.functions import create_settings, get_settings
 from pyclue.apps.keys.functions import get_keys, delete_key, update_key
 from pyclue.apps.keys.ui import AddKeyForm
 from pyclue.apps.security.functions import decode_password
-from pyclue.apps.settings.ui import AppSettingsForm
+from pyclue.apps.settings.ui.forms import AppSettingsForm
+from pyclue.apps.main.ui.ui_sizes import get_launch_size, get_main_size
+
 
 class LaunchForm(QtGui.QWidget):
 
@@ -33,9 +35,7 @@ class LaunchForm(QtGui.QWidget):
 
     def drawUI(self):
         self.setObjectName("LaunchForm")
-        self.resize(300, 316)
-        self.setMinimumSize(QtCore.QSize(300, 316))
-        self.setMaximumSize(QtCore.QSize(300, 316))
+        get_launch_size(self)
         self.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
         self.gridMain = QtGui.QGridLayout(self)
         self.gridMain.setObjectName("gridMain")
@@ -86,7 +86,7 @@ class LaunchForm(QtGui.QWidget):
         self.btnSave = QtGui.QPushButton(self)
         self.btnSave.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(self.get_save_icon()), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap(get_save_icon()), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btnSave.setIcon(icon)
         self.btnSave.setIconSize(QtCore.QSize(30, 30))
         self.btnSave.setObjectName("btnSave")
@@ -94,7 +94,7 @@ class LaunchForm(QtGui.QWidget):
         self.btnExit = QtGui.QPushButton(self)
         self.btnExit.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap(self.get_exit_icon()), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon1.addPixmap(QtGui.QPixmap(get_exit_icon()), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btnExit.setIcon(icon1)
         self.btnExit.setIconSize(QtCore.QSize(30, 30))
         self.btnExit.setObjectName("btnExit")
@@ -115,21 +115,11 @@ class LaunchForm(QtGui.QWidget):
         self.btnSave.clicked.connect(self.save_settings)
         self.btnExit.clicked.connect(self.exit)
 
-    def get_save_icon(self):
-        img = "save.png"
-        path =  os.path.abspath(os.path.join(RESOURCES_DIR,'img/%s'%img))
-        return path
 
-    def get_exit_icon(self):
-        img = "quit.png"
-        path =  os.path.abspath(os.path.join(RESOURCES_DIR,'main/img/%s'%img))
-        return path
-
-
-    """
-    Save the initial configuration
-    """
     def save_settings(self):
+        """
+        Save the initial configuration
+        """
         self.construct_get_data()
         data = self.validate_data()
         if data['status']:
@@ -150,18 +140,20 @@ class LaunchForm(QtGui.QWidget):
         else:
             QtGui.QMessageBox.about(self, "Error", data['message'])
 
-    """
-    Takes the field values and insert it to self variables
-    """
+
     def construct_get_data(self):
+        """
+        Takes the field values and insert it to self variables
+        """
         self.fullName = self.txtFullName.text()
         self.password_one = self.txtPassword.text()
         self.password_two = self.txtPassword_2.text()
 
-    """
-    Validate empty fields.
-    """
+
     def validate_data(self):
+        """
+        Validate empty fields.
+        """
         self.construct_get_data()
         flag = True
         message = ""
@@ -216,9 +208,7 @@ class MainForm(QtGui.QMainWindow):
         # Nombre de la ventana
         self.setWindowTitle('Keys Python')
         # Windows Size
-        self.resize(400, 472)
-        self.setMinimumSize(QtCore.QSize(400, 472))
-        self.setMaximumSize(QtCore.QSize(569, 511))
+        get_main_size(self)
         self.centralwidget = QtGui.QWidget(self)
         SetIcon(self)
         # Set the grid to show de keys list
@@ -284,7 +274,7 @@ class MainForm(QtGui.QMainWindow):
         self.btnViewPassword.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.btnViewPassword.setObjectName("btnViewPassword")
         self.btnViewPassword.setText("View Pass")
-        icon = QtGui.QIcon(self.get_view_pass_icon())
+        icon = QtGui.QIcon(get_view_pass_icon())
         self.btnViewPassword.setIcon(icon)
         self.horizontalLayout_2.addWidget(self.btnViewPassword)
         self.gridLayout.addLayout(self.horizontalLayout_2, 9, 0, 1, 1)
@@ -305,7 +295,7 @@ class MainForm(QtGui.QMainWindow):
         # Add the Delete Button ===========================
         self.btnDelete = QtGui.QPushButton(self.groupBox)
         self.btnDelete.setObjectName("btnDelete")
-        icon = QtGui.QIcon(self.get_delete_icon())
+        icon = QtGui.QIcon(get_delete_icon())
         self.btnDelete.setIcon(icon)
         self.btnDelete.setText("Delete")
         self.btnDelete.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
@@ -313,7 +303,7 @@ class MainForm(QtGui.QMainWindow):
         #Add the Save Button ============================
         self.btnSave = QtGui.QPushButton(self.groupBox)
         self.btnSave.setObjectName("btnSave")
-        icon = QtGui.QIcon(self.get_update_icon())
+        icon = QtGui.QIcon(get_update_icon())
         self.btnSave.setIcon(icon)
         self.btnSave.setText("Save")
         self.btnSave.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
@@ -323,17 +313,17 @@ class MainForm(QtGui.QMainWindow):
         self.setCentralWidget(self.centralwidget)
         #===================== START ToolBar =========================================
         # Add the Lock Button
-        self.lockAction = QtGui.QAction(QtGui.QIcon(self.get_locked_icon()),'Lock the Windows',self)
+        self.lockAction = QtGui.QAction(QtGui.QIcon(get_locked_icon()),'Lock the Windows',self)
         self.lockAction.setShortcut('Ctrl+L')
         # Add the Exit Button
-        self.exitAction = QtGui.QAction(QtGui.QIcon(self.get_exit_icon()),'Exit',self)
+        self.exitAction = QtGui.QAction(QtGui.QIcon(get_exit_icon()),'Exit',self)
         self.exitAction.setShortcut('Ctrl+Q')
         self.exitAction.triggered.connect(QtGui.qApp.quit)
         # Add the Add Button
-        self.addKeyAction = QtGui.QAction(QtGui.QIcon(self.get_add_icon()),'Add Key',self)
+        self.addKeyAction = QtGui.QAction(QtGui.QIcon(get_add_icon()),'Add Key',self)
         self.addKeyAction.setShortcut('Ctrl+A')
         # Add the Settings Button
-        self.settingsAction = QtGui.QAction(QtGui.QIcon(self.get_settings_icon()),'Settings',self)
+        self.settingsAction = QtGui.QAction(QtGui.QIcon(get_settings_icon()),'Settings',self)
         self.settingsAction.setShortcut('Ctrl+S')
         # Create toolBar Element
         self.toolBar = self.addToolBar('Main')
@@ -366,46 +356,7 @@ class MainForm(QtGui.QMainWindow):
     def show_add_key_form(self):
         self.createAddForm()
 
-    def get_exit_icon(self):
-        img = "quit.png"
-        path =  os.path.abspath(os.path.join(RESOURCES_DIR,'main/img/%s'%img))
-        return path
 
-    def get_add_user_icon(self):
-        img = "addUser.png"
-        path =  os.path.abspath(os.path.join(RESOURCES_DIR,'main/img/%s'%img))
-        return path
-
-    def get_locked_icon(self):
-        img = "lock.png"
-        path =  os.path.abspath(os.path.join(RESOURCES_DIR,'main/img/%s'%img))
-        return path
-
-    def get_delete_icon(self):
-        img = "delete.png"
-        path =  os.path.abspath(os.path.join(RESOURCES_DIR,'main/img/%s'%img))
-        return path
-
-    def get_view_pass_icon(self):
-        img = "view_pass.png"
-        path =  os.path.abspath(os.path.join(RESOURCES_DIR,'main/img/%s'%img))
-        return path
-
-
-    def get_update_icon(self):
-        img = "update.png"
-        path =  os.path.abspath(os.path.join(RESOURCES_DIR,'main/img/%s'%img))
-        return path
-
-    def get_add_icon(self):
-        img = "key_add.png"
-        path =  os.path.abspath(os.path.join(RESOURCES_DIR,'main/img/%s'%img))
-        return path
-
-    def get_settings_icon(self):
-        img = "settings.png"
-        path =  os.path.abspath(os.path.join(RESOURCES_DIR,'main/img/%s'%img))
-        return path
 
     def set_list_elements(self):
         keys = get_keys()
