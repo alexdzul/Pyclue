@@ -61,3 +61,5 @@ pyclue/.idea/
 .db
 pyclue.db
 pyclue/pyclue.db
+pyclue/*.db
+*.db
