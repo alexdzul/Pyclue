@@ -118,10 +118,10 @@ class LoginForm(QtGui.QWidget):
 
     def get_login_icon(self):
         img = "login.png"
-        path =  os.path.abspath(os.path.join(RESOURCES_DIR,'main/img/%s'%img))
+        path =  os.path.abspath(os.path.join(RESOURCES_DIR,'main/%s'%img))
         return path
 
     def get_quit_icon(self):
         img = "quit.png"
-        path =  os.path.abspath(os.path.join(RESOURCES_DIR,'main/img/%s'%img))
+        path =  os.path.abspath(os.path.join(RESOURCES_DIR,'main/%s'%img))
         return path

@@ -14,10 +14,15 @@ licence = LICENCE
 
 
 APP = ['pyclue/main.py']
-DATA_FILES =[('resources',['pyclue/resources/img']),('resources/keys',['pyclue/resources/keys/img'])]
+DATA_FILES =[('resources',['pyclue/resources/img']),
+             ('resources/keys',['pyclue/resources/keys/']),
+             ('resources/main',['pyclue/resources/main/']),
+             ('resources/settings',['pyclue/resources/settings/']),
+    ]
 OPTIONS = {
     'iconfile':'pyclue/resources/img/icon.icns',
     'argv_emulation': True,
+    'includes': ['sip', 'PyQt4']
 }
 
 

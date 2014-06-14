@@ -3,7 +3,7 @@ __author__ = 'alex'
 from PyQt4 import QtGui
 from PyQt4 import QtCore
 from pyclue.ui.generics.functions import Center, alert
-from pyclue.appSettings import PROJECT_DIR
+from pyclue.apps.keys.ui.resources_mapper import set_icon,get_icon_random_btn
 from pyclue.apps.keys.models import Key
 from pyclue.apps.keys.functions import save_key
 from pyclue.apps.keys.ui.ui_sizes import get_add_key_size
@@ -30,7 +30,7 @@ class AddKeyForm(QtGui.QWidget):
         self.setWindowTitle('New')
         get_add_key_size(self)
         Center(self)
-        self.set_icon()
+        set_icon(self)
         # Start the Vertical Layout
         self.verticalLayout = QtGui.QVBoxLayout(self)
         #1. Set group Box Name and added into a grid element
@@ -90,7 +90,7 @@ class AddKeyForm(QtGui.QWidget):
         self.btnRandom.setObjectName("btnRandom")
         self.btnRandom.setText("Random")
         self.btnRandom.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
-        icon = QtGui.QIcon(self.get_icon_random_btn())
+        icon = QtGui.QIcon(get_icon_random_btn(self))
         self.btnRandom.setIcon(icon)
         self.gridLayout_gbInfo.addWidget(self.btnRandom, 4, 2, 1, 1)
         #3. Set group Box Notes and added into a grid element
@@ -116,13 +116,6 @@ class AddKeyForm(QtGui.QWidget):
         self.btnCancel.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.verticalLayout.addWidget(self.btnCancel)
 
-    def set_icon(self):
-        APP_ICON = os.path.join(PROJECT_DIR,"resources/keys/img/key_add.png")
-        self.setWindowIcon(QtGui.QIcon(APP_ICON))
-
-    def get_icon_random_btn(self):
-        btnIcon = os.path.join(PROJECT_DIR,"resources/keys/img/random.png")
-        return btnIcon
 
     def run(self):
         self.show()

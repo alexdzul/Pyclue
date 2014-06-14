@@ -12,6 +12,7 @@ from pyclue.apps.keys.ui.forms import AddKeyForm
 from pyclue.apps.security.functions import decode_password
 from pyclue.apps.settings.ui.forms import AppSettingsForm
 from pyclue.apps.main.ui.ui_sizes import get_launch_size, get_main_size
+from pyclue.appSettings import RESOURCES_DIR
 
 
 class LaunchForm(QtGui.QWidget):
@@ -206,7 +207,7 @@ class MainForm(QtGui.QMainWindow):
 
     def drawUI(self):
         # Nombre de la ventana
-        self.setWindowTitle('My Keys')
+        self.setWindowTitle('PyClue')
         # Windows Size
         get_main_size(self)
         self.centralwidget = QtGui.QWidget(self)
@@ -376,6 +377,7 @@ class MainForm(QtGui.QMainWindow):
         self.addKey.show()
 
     def set_statusBar(self,message):
+        message += RESOURCES_DIR
         self.statusBar().showMessage(message)
 
     def hide_this_and_show_login(self):
