@@ -1,10 +1,6 @@
 #!/usr/bin/env python
-from pyclue.appSettings import VERSION, AUTHOR, AUTHOR_EMAIL, SOFTWARE_NAME, LICENCE, OS_RUNING
-from distutils.core import setup
-if OS_RUNING == "darwin":
-    pass
-else:
-    import py2exe
+from pyclue.appSettings import VERSION, AUTHOR, AUTHOR_EMAIL, SOFTWARE_NAME, LICENCE
+from setuptools import setup, find_packages
 
 
 version = VERSION
@@ -13,8 +9,23 @@ author_email = AUTHOR_EMAIL
 mainteiner = AUTHOR
 mainteiner_email = AUTHOR_EMAIL
 licence = LICENCE
+
+
+
+
+APP = ['pyclue/main.py']
+DATA_FILES =[('resources',['pyclue/resources/img']),('resources/keys',['pyclue/resources/keys/img'])]
+OPTIONS = {
+    'iconfile':'pyclue/resources/img/icon.icns',
+    'argv_emulation': True,
+}
+
+
 setup(
-    windows=['pyclue/main.py'],
+    app = APP,
+    options = {'py2app': OPTIONS},
+    data_files = DATA_FILES,
+    setup_requires = ['py2app'],
     name=SOFTWARE_NAME,
     version=version,
     description='Open Source Password Manager which simplifies the task of grouping secret information in one place.',
@@ -22,8 +33,11 @@ setup(
     license=licence,
     author=author,
     author_email=author_email,
-    url='http://www.github.com/alexdzul/Pyclue/',
-    packages=['pyclue','pyclue.apps','pyclue.ui','pyclue.resources'],
+    maintainer=mainteiner,
+    maintainer_email=mainteiner_email,
+    url='http://pyclue.org',
+    download_url='http://pyclue.org',
+    packages=find_packages(),
     classifiers=[
             "Development Status :: 2 - Pre-Alpha",
             "Environment :: X11 Applications :: Qt",
@@ -34,5 +48,5 @@ setup(
             "Programming Language :: Python :: 2.7",
             "Programming Language :: Python :: 3",
             "Topic :: Security",
-            ]
+            ],
     )
