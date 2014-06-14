@@ -1,7 +1,10 @@
 #!/usr/bin/env python
-from pyclue.appSettings import VERSION, AUTHOR, AUTHOR_EMAIL, SOFTWARE_NAME, LICENCE
+from pyclue.appSettings import VERSION, AUTHOR, AUTHOR_EMAIL, SOFTWARE_NAME, LICENCE, OS_RUNING
 from distutils.core import setup
-import py2exe
+if OS_RUNING == "darwin":
+    pass
+else:
+    import py2exe
 
 
 version = VERSION

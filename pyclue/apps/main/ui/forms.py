@@ -8,7 +8,7 @@ from pyclue.appSettings import WELCOME_MESSAGE
 from pyclue.ui.generics.functions import Center,SetIcon
 from pyclue.apps.settings.functions import create_settings, get_settings
 from pyclue.apps.keys.functions import get_keys, delete_key, update_key
-from pyclue.apps.keys.ui import AddKeyForm
+from pyclue.apps.keys.ui.forms import AddKeyForm
 from pyclue.apps.security.functions import decode_password
 from pyclue.apps.settings.ui.forms import AppSettingsForm
 from pyclue.apps.main.ui.ui_sizes import get_launch_size, get_main_size
@@ -206,7 +206,7 @@ class MainForm(QtGui.QMainWindow):
 
     def drawUI(self):
         # Nombre de la ventana
-        self.setWindowTitle('Keys Python')
+        self.setWindowTitle('My Keys')
         # Windows Size
         get_main_size(self)
         self.centralwidget = QtGui.QWidget(self)

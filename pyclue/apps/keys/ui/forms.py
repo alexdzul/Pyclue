@@ -6,6 +6,7 @@ from pyclue.ui.generics.functions import Center, alert
 from pyclue.appSettings import PROJECT_DIR
 from pyclue.apps.keys.models import Key
 from pyclue.apps.keys.functions import save_key
+from pyclue.apps.keys.ui.ui_sizes import get_add_key_size
 import os
 
 
@@ -26,9 +27,8 @@ class AddKeyForm(QtGui.QWidget):
 
     def drawUI(self):
         # Set some basic settings to the form
-        self.setWindowTitle('Login')
-        self.resize(338, 439)
-        self.setMinimumSize(QtCore.QSize(338, 439))
+        self.setWindowTitle('New')
+        get_add_key_size(self)
         Center(self)
         self.set_icon()
         # Start the Vertical Layout
@@ -155,4 +155,3 @@ class AddKeyForm(QtGui.QWidget):
             self.Main.set_list_elements()
             # Close the windows.
             self.close()
-
