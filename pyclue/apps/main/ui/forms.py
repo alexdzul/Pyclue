@@ -377,7 +377,6 @@ class MainForm(QtGui.QMainWindow):
         self.addKey.show()
 
     def set_statusBar(self,message):
-        message += RESOURCES_DIR
         self.statusBar().showMessage(message)
 
     def hide_this_and_show_login(self):
