@@ -75,7 +75,7 @@ class AppSettingsForm(QtGui.QWidget):
         self.gridLayout_4.addWidget(self.lblCurrentPass, 0, 0, 1, 1)
         self.txtNewPass = QtGui.QLineEdit(self.gbChangePassword)
         self.txtNewPass.setObjectName("txtNewPass")
-        self.txtCurrentPass.setEchoMode(QtGui.QLineEdit.Password)
+        self.txtNewPass.setEchoMode(QtGui.QLineEdit.Password)
         self.gridLayout_4.addWidget(self.txtNewPass, 1, 2, 1, 1)
         self.lblNewPass = QtGui.QLabel(self.gbChangePassword)
         self.lblNewPass.setObjectName("lblNewPass")

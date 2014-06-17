@@ -42,7 +42,7 @@ setup(
     maintainer_email=mainteiner_email,
     url='http://pyclue.org',
     download_url='http://pyclue.org',
-    packages=find_packages(),
+    #packages=find_packages(),
     classifiers=[
             "Development Status :: 2 - Pre-Alpha",
             "Environment :: X11 Applications :: Qt",
