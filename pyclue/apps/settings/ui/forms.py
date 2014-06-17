@@ -156,6 +156,7 @@ class AppSettingsForm(QtGui.QWidget):
         self.btnSaveMyAccount.setIcon(icon1)
         self.btnSaveMyAccount.setIconSize(QtCore.QSize(40, 40))
         self.btnSaveMyAccount.setObjectName("btnSaveMyAccount")
+        self.btnSaveMyAccount.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.horizontalLayout.addWidget(self.btnSaveMyAccount)
         self.btnCancel = QtGui.QPushButton(self)
         self.btnCancel.setText("")
@@ -164,6 +165,7 @@ class AppSettingsForm(QtGui.QWidget):
         self.btnCancel.setIcon(icon2)
         self.btnCancel.setIconSize(QtCore.QSize(40, 40))
         self.btnCancel.setObjectName("btnCancel")
+        self.btnCancel.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.horizontalLayout.addWidget(self.btnCancel)
         self.gridLayout_9.addLayout(self.horizontalLayout, 1, 0, 1, 1)
 
