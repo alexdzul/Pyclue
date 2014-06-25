@@ -1,7 +1,8 @@
 __author__ = 'alex'
 from peewee import *
 import string, random
-from pyclue.appSettings import DB_NAME
+from pyclue.appSettings import get_data_path
+
 """
 Key Object.
 """
@@ -14,7 +15,7 @@ class Key(Model):
     notes = TextField()
 
     class Meta:
-        database = SqliteDatabase(DB_NAME)
+        database = SqliteDatabase(get_data_path())
 
     def generate_password(self,size=8):
         chars = string.ascii_letters + str(random.random())

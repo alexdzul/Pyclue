@@ -1,6 +1,7 @@
 __author__ = 'alex'
 from peewee import *
-from pyclue.appSettings import DB_NAME
+from pyclue.appSettings import get_data_path
+
 
 class MainSettings(Model):
     period_backup = CharField()
@@ -14,4 +15,4 @@ class MainSettings(Model):
     version = CharField()
 
     class Meta:
-        database = SqliteDatabase(DB_NAME)
+        database = SqliteDatabase(get_data_path())

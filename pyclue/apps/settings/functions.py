@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 __author__ = 'alex'
-import base64, sys
+import base64, sys, traceback
 from pyclue.apps.settings.models import MainSettings
 from pyclue.appSettings import VERSION
 
@@ -35,7 +35,7 @@ def create_settings(user_fullName, user_password):
     except:
         message = "Error" + str(sys.exc_info()[0]) + " " +\
                       str(sys.exc_info()[1]) + " " + \
-                      str(sys.exc_info()[2])
+                      str(sys.exc_info()[2]) + " " + traceback.format_exc()
         print message
         return False
 

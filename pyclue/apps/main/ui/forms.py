@@ -12,7 +12,6 @@ from pyclue.apps.keys.ui.forms import AddKeyForm
 from pyclue.apps.security.functions import decode_password
 from pyclue.apps.settings.ui.forms import AppSettingsForm
 from pyclue.apps.main.ui.ui_sizes import get_launch_size, get_main_size
-from pyclue.appSettings import RESOURCES_DIR
 
 
 class LaunchForm(QtGui.QWidget):

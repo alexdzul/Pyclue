@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 __author__ = 'alex'
-import os
+import os, sys, traceback
 from pyclue.apps.settings.models import MainSettings
 from pyclue.apps.keys.models import Key
 
@@ -12,7 +12,11 @@ class database():
             Key.create_table()
             MainSettings.create_table()
         except:
-            pass
+            message = "Error" + str(sys.exc_info()[0]) + " " +\
+                      str(sys.exc_info()[1]) + " " + \
+                      str(sys.exc_info()[2])  + " " + traceback.format_exc()
+            print message
+        pass
 
     def exist(self, db_path):
         try:

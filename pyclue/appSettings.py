@@ -32,3 +32,53 @@ ABOUT_MESSAGE = "<html><head/><body><p><span style=\" font-size:12pt; font-weigh
                 "font-weight:600;\">Github.</span></p><p>View the code on <a href=\"https://github.com/alexdzul/Pyclue\">" \
                 "<span style=\" text-decoration: underline; color:#0000ff;\">https://github.com/alexdzul/Pyclue</span></a>" \
                 "<br/></p></body></html>"
+
+
+
+def get_data_path():
+    print "entra a get_complete_db_path"
+    database_file = None
+    from os.path import expanduser
+    try:
+        if OS_RUNING == "darwin":
+            path = expanduser("~")
+            database_file = "%s/Library/%s/data/%s"%(path, SOFTWARE_NAME, DB_NAME)
+    except:
+        database_file = None
+    print "El path es: %s" % database_file
+    return database_file
+
+
+def create_default_backups_path():
+    if OS_RUNING == "darwin":
+        from os.path import expanduser
+        path = expanduser("~")
+        path = "%s/Library/%s/backups/"%(path, SOFTWARE_NAME)
+    else:
+        path = "coming soon..."
+    try:
+        if not os.path.exists(path):
+            os.makedirs(path)
+            print "True"
+            return True
+    except:
+        print "False"
+        return False
+
+
+
+def create_data_path():
+    from os.path import expanduser
+    if OS_RUNING == "darwin":
+        path = expanduser("~")
+        path = "%s/Library/%s/data/"%(path, SOFTWARE_NAME)
+    else:
+        path = "coming soon..."
+    try:
+        if not os.path.exists(path):
+            os.makedirs(path)
+            print "True"
+            return True
+    except:
+        print "False"
+        return False
