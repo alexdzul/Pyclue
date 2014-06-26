@@ -212,10 +212,10 @@ class AppSettingsForm(QtGui.QWidget):
             if self.password_1 == self.password_2:
                 if self.password_1 == "":
                     success = save_settings(self.Periodicity,self.NoBackup,
-                              self.NumFiles, self.FileName,self.FullName,self.password_1)
+                              self.NumFiles, self.FileName,self.FullName)
                 else:
                     success = save_settings(self.Periodicity,self.NoBackup,
-                              self.NumFiles, self.FileName,self.FullName)
+                              self.NumFiles, self.FileName,self.FullName,self.password_1)
                 if success:
                     self.close()
                     self.Main.load_settings()
