@@ -25,6 +25,7 @@ class AppSettingsForm(QtGui.QWidget):
         SetIcon(self)
         Center(self)
         self.fill_data()
+        self.disable_enable_backup_elements()
         self.setConnectors()
         self.setTextElements()
 
@@ -226,3 +227,15 @@ class AppSettingsForm(QtGui.QWidget):
     def setConnectors(self):
         self.btnCancel.pressed.connect(self.close)
         self.btnSaveMyAccount.pressed.connect(self.save_settings)
+        self.checkNoBackup.stateChanged.connect(self.disable_enable_backup_elements)
+
+
+    def disable_enable_backup_elements(self):
+        if self.checkNoBackup.isChecked():
+            self.txtFileName.setEnabled(False)
+            self.cmbPeriodicity.setEnabled(False)
+            self.sbNumFiles.setEnabled(False)
+        else:
+            self.txtFileName.setEnabled(True)
+            self.cmbPeriodicity.setEnabled(True)
+            self.sbNumFiles.setEnabled(True)

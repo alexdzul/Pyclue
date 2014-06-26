@@ -6,5 +6,4 @@ es igual a la que introdujo el usuario en el campo "Current Password".
 2. Al cargar el form principal del listado de keys, si no existe ninguno entonces debe desactivar los campos de texto
 de la derecha.
 3. En la pestaña "My account" realizar un orden correcto de focus de los campos.
-4. En la pestaña de "Backup" al seleccionar "No Backups" deberá deshabilitar todos los campos existentes en esa vista.
-5. En la pestaña "About Pyclue" revisar que funcionen los links de las páginas que aparecen en el texto.
+4. En la pestaña "About Pyclue" revisar que funcionen los links de las páginas que aparecen en el texto.
