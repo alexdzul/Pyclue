@@ -353,9 +353,9 @@ class MainForm(QtGui.QMainWindow):
     def run(self):
         self.show()
 
+
     def show_add_key_form(self):
         self.createAddForm()
-
 
 
     def set_list_elements(self):
@@ -367,28 +367,35 @@ class MainForm(QtGui.QMainWindow):
                 item.setData(QtCore.Qt.UserRole,key)
                 self.listKeys.addItem(item)
 
+
     def clear_list_elements(self):
         self.listKeys.clear()
+
 
     def createAddForm(self):
         mainForm = self
         self.addKey = AddKeyForm(mainForm)
         self.addKey.show()
 
+
     def set_statusBar(self,message):
         self.statusBar().showMessage(message)
+
 
     def hide_this_and_show_login(self):
         self.close()
         self.loginForm.show()
 
+
     def update_key_list(self):
         self.clear_list_elements()
         self.set_list_elements()
 
+
     def show_appSettings_form(self):
         self.appSett = AppSettingsForm(self.settings,self)
         self.appSett.run()
+
 
     def setConnectors(self):
         self.listKeys.currentItemChanged.connect(self.get_item_info)
@@ -444,7 +451,7 @@ class MainForm(QtGui.QMainWindow):
         item_updated = update_key(key_object, new_data)
         if item_updated:
             item_list.setText(item_updated.name)
-            self.show_hide_password()
+            self.hide_password()
         else:
             QtGui.QMessageBox.about(self, "Error",
                                     "There was an error during updating")

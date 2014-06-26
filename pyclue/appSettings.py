@@ -40,7 +40,7 @@ def get_data_path():
     database_file = None
     from os.path import expanduser
     try:
-        if OS_RUNING == "darwin":
+        if OS_RUNING == "darwin": # if it's running on MAC
             path = expanduser("~")
             database_file = "%s/Library/%s/data/%s"%(path, SOFTWARE_NAME, DB_NAME)
     except:
@@ -48,6 +48,12 @@ def get_data_path():
     print "El path es: %s" % database_file
     return database_file
 
+
+
+
+""" ====================================================================================
+Functions to create the primary paths.
+========================================================================================"""
 
 def create_default_backups_path():
     if OS_RUNING == "darwin":
