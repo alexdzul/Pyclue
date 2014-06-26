@@ -2,6 +2,7 @@
 __author__ = 'alex'
 import os, sys
 
+OS_RUNING = sys.platform
 SOFTWARE_NAME = "Pyclue"
 VERSION = "0.1"
 AUTHOR = "Alex Dzul"
@@ -11,9 +12,14 @@ LICENCE = "GPL v2"
 
 PROJECT_DIR = "pyclue"
 RESOURCES_DIR = 'resources'
-APP_ICON = os.path.join(RESOURCES_DIR,'img/key.ico')
+
+if OS_RUNING == "darwin":
+    APP_ICON = os.path.join(RESOURCES_DIR,'img/key.ico')
+else:
+    APP_ICON = os.path.join("%s/%s"%(PROJECT_DIR,RESOURCES_DIR),'img/key.ico')
+    
 DB_NAME = 'pyclue.db'
-OS_RUNING = sys.platform
+
 
 
 

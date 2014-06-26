@@ -8,8 +8,10 @@ def Center(uiForm):
         qr.moveCenter(cp)
         uiForm.move(qr.topLeft())
 
+
 def SetIcon(uiForm):
         uiForm.setWindowIcon(QtGui.QIcon(APP_ICON))
+
 
 def alert(uiForm, title, message):
     QtGui.QMessageBox.about(uiForm, title, message)

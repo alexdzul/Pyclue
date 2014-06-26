@@ -1,13 +1,16 @@
-# -*- coding: utf-8 -*-
-__author__ = 'alex'
-import os
+'''
+Created on 26/06/2014
+
+@author: edzul
+'''
 from PyQt4 import QtGui
 from PyQt4 import QtCore
 from pyclue.apps.main.ui.forms import MainForm
-from pyclue.appSettings import RESOURCES_DIR
 from pyclue.ui.generics.functions import Center, SetIcon
 from pyclue.apps.security.functions import decode_password
 from pyclue.apps.settings.functions import get_settings
+from pyclue.apps.security.ui.ui_sizes import get_login_size
+from pyclue.apps.security.ui.resources_mapper import get_login_icon, get_quit_icon
 
 
 class LoginForm(QtGui.QWidget):
@@ -68,9 +71,7 @@ class LoginForm(QtGui.QWidget):
         self.setObjectName("loginForm")
         self.setWindowTitle("Login PyClue")
         self.setWindowModality(QtCore.Qt.NonModal)
-        self.resize(391, 130)
-        self.setMinimumSize(QtCore.QSize(391, 130))
-        self.setMaximumSize(QtCore.QSize(391, 130))
+        get_login_size(self)
         self.gridLayout = QtGui.QGridLayout(self)
         self.gridLayout.setObjectName("gridLayout")
         self.horizontalLayoutPassword = QtGui.QHBoxLayout()
@@ -95,7 +96,7 @@ class LoginForm(QtGui.QWidget):
         self.btnLogin.setMinimumSize(QtCore.QSize(0, 0))
         self.btnLogin.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         iconLogin = QtGui.QIcon()
-        iconLogin.addPixmap(QtGui.QPixmap(self.get_login_icon()), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        iconLogin.addPixmap(QtGui.QPixmap(get_login_icon()), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btnLogin.setIcon(iconLogin)
         self.btnLogin.setIconSize(QtCore.QSize(40, 40))
         self.btnLogin.setObjectName("btnLogin")
@@ -103,7 +104,7 @@ class LoginForm(QtGui.QWidget):
         self.btnExit = QtGui.QPushButton(self)
         self.btnExit.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         iconExit = QtGui.QIcon()
-        iconExit.addPixmap(QtGui.QPixmap(self.get_quit_icon()), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        iconExit.addPixmap(QtGui.QPixmap(get_quit_icon()), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btnExit.setIcon(iconExit)
         self.btnExit.setIconSize(QtCore.QSize(40, 40))
         self.btnExit.setObjectName("btnExit")
@@ -115,13 +116,3 @@ class LoginForm(QtGui.QWidget):
         self.setWindowTitle("Login")
         self.btnExit.setText("Exit")
         self.btnLogin.setText("Login")
-
-    def get_login_icon(self):
-        img = "login.png"
-        path =  os.path.abspath(os.path.join(RESOURCES_DIR,'main/%s'%img))
-        return path
-
-    def get_quit_icon(self):
-        img = "quit.png"
-        path =  os.path.abspath(os.path.join(RESOURCES_DIR,'main/%s'%img))
-        return path

@@ -3,7 +3,7 @@
 import sys
 from PyQt4 import QtGui
 from pyclue.appSettings import create_data_path, create_default_backups_path
-from pyclue.apps.security.ui import LoginForm
+from pyclue.apps.security.ui.forms import LoginForm
 from pyclue.apps.main.ui.forms import LaunchForm
 from pyclue.apps.database.functions import create_db
 from pyclue.apps.settings.functions import settings_exist
