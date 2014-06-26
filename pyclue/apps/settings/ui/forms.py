@@ -199,7 +199,6 @@ class AppSettingsForm(QtGui.QWidget):
         self.CurrentPass = self.txtCurrentPass.text()
         self.password_1 = self.txtNewPass.text()
         self.password_2 = self.txtTypeAgainPass.text()
-        self.StorePath = self.txtStorePath.text()
         self.FileName = self.txtFileName.text()
         self.NoBackup = self.checkNoBackup.isChecked()
         self.NumFiles = self.sbNumFiles.text()
@@ -210,10 +209,10 @@ class AppSettingsForm(QtGui.QWidget):
         self.get_form_data()
         if self.password_1 == self.password_2:
             if self.password_1 == "":
-                success = save_settings(self.Periodicity,self.NoBackup, self.StorePath,
+                success = save_settings(self.Periodicity,self.NoBackup,
                           self.NumFiles, self.FileName,self.FullName,self.password_1)
             else:
-                success = save_settings(self.Periodicity,self.NoBackup, self.StorePath,
+                success = save_settings(self.Periodicity,self.NoBackup,
                           self.NumFiles, self.FileName,self.FullName)
             if success:
                 self.close()

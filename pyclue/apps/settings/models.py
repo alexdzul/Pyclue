@@ -6,7 +6,6 @@ from pyclue.appSettings import get_data_path
 class MainSettings(Model):
     period_backup = CharField()
     deactivate_backup = BooleanField()
-    path_store = CharField(null=True)
     num_files_store = IntegerField()
     file_name_backup = CharField()
     file_name_sufix_backup = CharField()

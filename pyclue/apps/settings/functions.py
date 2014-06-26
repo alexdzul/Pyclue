@@ -17,8 +17,6 @@ def decode_password(pw):
 
 
 def create_settings(user_fullName, user_password):
-    print user_password
-    print user_fullName
     try:
         main = MainSettings()
         main.user_fullName = user_fullName
@@ -58,7 +56,7 @@ def get_settings():
 
 
 
-def save_settings(period_backup, deactivate_backup, path_store,
+def save_settings(period_backup, deactivate_backup,
                   num_files_store, file_name_backup,
                   user_fullName, user_password=None):
     try:
@@ -66,7 +64,6 @@ def save_settings(period_backup, deactivate_backup, path_store,
         if my_set:
             my_set.period_backup = period_backup
             my_set.deactivate_backup = deactivate_backup
-            my_set.path_store = path_store
             my_set.num_files_store = num_files_store
             my_set.file_name_backup = file_name_backup
             my_set.user_fullName = user_fullName
