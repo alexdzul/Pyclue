@@ -4,6 +4,10 @@ import os, sys, traceback
 from pyclue.appSettings import DB_NAME, PROJECT_DIR
 from pyclue.apps.database.models import database
 
+
+"""
+Obtiene el path de la base de datos
+"""
 def get_db_path():
     try:
         path = os.path.join(PROJECT_DIR,DB_NAME)
@@ -17,6 +21,10 @@ def get_db_path():
         print message
         return None
 
+
+"""
+Crea la base de datos pyclue
+"""
 def create_db():
     try:
         db = database()
