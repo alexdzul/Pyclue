@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 __author__ = 'alex'
-import os
 from PyQt4 import QtGui
 from PyQt4 import QtCore
 from pyclue.apps.main.ui.resources_mapper import *
