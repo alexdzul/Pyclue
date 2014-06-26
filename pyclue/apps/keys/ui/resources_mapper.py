@@ -1,5 +1,5 @@
 __author__ = 'alex'
-from pyclue.appSettings import RESOURCES_DIR
+from pyclue.appSettings import RESOURCES_DIR, PROJECT_DIR, OS_RUNING
 from PyQt4 import QtGui
 import os
 
@@ -10,5 +10,8 @@ def set_icon(self):
 
 def get_icon_random_btn(self):
     img = 'random.png'
-    btnIcon = os.path.join(RESOURCES_DIR,"keys/%s"%img)
+    if OS_RUNING == "darwin":
+        btnIcon = os.path.join(RESOURCES_DIR,"keys/%s"%img)
+    else:
+        btnIcon = os.path.join("%s/%s"%(PROJECT_DIR,RESOURCES_DIR),"keys/%s"%img)
     return btnIcon

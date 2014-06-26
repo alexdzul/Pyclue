@@ -43,6 +43,8 @@ def get_data_path():
         if OS_RUNING == "darwin": # if it's running on MAC
             path = expanduser("~")
             database_file = "%s/Library/%s/data/%s"%(path, SOFTWARE_NAME, DB_NAME)
+        else:
+            database_file = "data/%s" % DB_NAME
     except:
         database_file = None
     print "El path es: %s" % database_file
@@ -61,14 +63,12 @@ def create_default_backups_path():
         path = expanduser("~")
         path = "%s/Library/%s/backups/"%(path, SOFTWARE_NAME)
     else:
-        path = "coming soon..."
+        path = "backups"
     try:
         if not os.path.exists(path):
             os.makedirs(path)
-            print "True"
             return True
     except:
-        print "False"
         return False
 
 
@@ -79,12 +79,10 @@ def create_data_path():
         path = expanduser("~")
         path = "%s/Library/%s/data/"%(path, SOFTWARE_NAME)
     else:
-        path = "coming soon..."
+        path = "data"
     try:
         if not os.path.exists(path):
             os.makedirs(path)
-            print "True"
             return True
     except:
-        print "False"
         return False
