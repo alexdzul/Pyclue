@@ -106,19 +106,9 @@ class AppSettingsForm(QtGui.QWidget):
         self.lblFiles = QtGui.QLabel(self.gbStoreSettings)
         self.lblFiles.setObjectName("lblFiles")
         self.gridLayout_5.addWidget(self.lblFiles, 1, 2, 1, 1)
-        self.btnFileBrowser = QtGui.QPushButton(self.gbStoreSettings)
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(get_folder_icon()), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.btnFileBrowser.setIcon(icon)
-        self.btnFileBrowser.setIconSize(QtCore.QSize(25, 25))
-        self.btnFileBrowser.setObjectName("btnFileBrowser")
-        self.gridLayout_5.addWidget(self.btnFileBrowser, 1, 4, 1, 1)
         self.lblStoreOnly = QtGui.QLabel(self.gbStoreSettings)
         self.lblStoreOnly.setObjectName("lblStoreOnly")
         self.gridLayout_5.addWidget(self.lblStoreOnly, 1, 0, 1, 1)
-        self.txtStorePath = QtGui.QLineEdit(self.gbStoreSettings)
-        self.txtStorePath.setObjectName("txtStorePath")
-        self.gridLayout_5.addWidget(self.txtStorePath, 0, 0, 1, 5)
         self.sbNumFiles = QtGui.QSpinBox(self.gbStoreSettings)
         self.sbNumFiles.setObjectName("sbNumFiles")
         self.gridLayout_5.addWidget(self.sbNumFiles, 1, 1, 1, 1)
@@ -189,7 +179,6 @@ class AppSettingsForm(QtGui.QWidget):
         self.gbStoreSettings.setTitle("Store Settings.")
         self.gbAccountInfo.setTitle("Account Info.")
         self.gbChangePassword.setTitle("Change password for login.")
-        self.btnFileBrowser.setText("...")
         self.checkNoBackup.setText("No Backups.")
         self.lblFiles.setText("Backups.")
 
@@ -198,8 +187,6 @@ class AppSettingsForm(QtGui.QWidget):
         self.checkNoBackup.setChecked(self.settings.deactivate_backup)
         self.sbNumFiles.setValue(int(self.settings.num_files_store))
         self.sbNumFiles.setMinimum(1)
-        if self.settings.path_store: # If it has path
-            self.txtStorePath.setText(self.settings.path_store)
         self.txtFileName.setText(self.settings.file_name_backup)
         # Find Selected periodicity and set current index
         index = self.cmbPeriodicity.findText(self.settings.period_backup)
@@ -238,11 +225,5 @@ class AppSettingsForm(QtGui.QWidget):
 
 
     def setConnectors(self):
-        self.btnFileBrowser.pressed.connect(self.openDialog)
         self.btnCancel.pressed.connect(self.close)
         self.btnSaveMyAccount.pressed.connect(self.save_settings)
-
-
-    def openDialog(self):
-        file = str(QtGui.QFileDialog.getExistingDirectory(self, "Select Directory"))
-        self.txtStorePath.setText(file)
