@@ -5,8 +5,8 @@ from PyQt4 import QtCore
 
 from pyclue.appSettings import ABOUT_MESSAGE
 from pyclue.ui.generics.functions import SetIcon, alert, Center
-from pyclue.apps.settings.functions import save_settings
-from pyclue.apps.settings.ui.resources_mapper import get_exit_icon, get_folder_icon, get_save_info_icon
+from pyclue.apps.settings.functions import save_settings, decode_password
+from pyclue.apps.settings.ui.resources_mapper import get_exit_icon, get_save_info_icon
 from pyclue.apps.settings.ui.ui_sizes import get_size
 
 class AppSettingsForm(QtGui.QWidget):
@@ -208,20 +208,24 @@ class AppSettingsForm(QtGui.QWidget):
 
     def save_settings(self):
         self.get_form_data()
-        if self.password_1 == self.password_2:
-            if self.password_1 == "":
-                success = save_settings(self.Periodicity,self.NoBackup,
-                          self.NumFiles, self.FileName,self.FullName,self.password_1)
+        if self.CurrentPass == decode_password(self.settings.user_password):
+            if self.password_1 == self.password_2:
+                if self.password_1 == "":
+                    success = save_settings(self.Periodicity,self.NoBackup,
+                              self.NumFiles, self.FileName,self.FullName,self.password_1)
+                else:
+                    success = save_settings(self.Periodicity,self.NoBackup,
+                              self.NumFiles, self.FileName,self.FullName)
+                if success:
+                    self.close()
+                    self.Main.load_settings()
+                else:
+                    alert(self,"Error","There was an error saving data...")
             else:
-                success = save_settings(self.Periodicity,self.NoBackup,
-                          self.NumFiles, self.FileName,self.FullName)
-            if success:
-                self.close()
-                self.Main.load_settings()
-            else:
-                alert(self,"Error","There was an error saving data...")
+                alert(self,"Info","Passwords don't match.")
         else:
-            alert(self,"Info","Passwords don't match.")
+            alert(self,"Info","Incorrect current password")
+            self.txtCurrentPass.setFocus()
 
 
     def setConnectors(self):
