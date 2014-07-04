@@ -28,6 +28,7 @@ class AppSettingsForm(QtGui.QWidget):
         self.disable_enable_backup_elements()
         self.setConnectors()
         self.setTextElements()
+        self.setFocusOrder()
 
     def drawUI(self):
         self.setObjectName("SettingsForm")
@@ -233,7 +234,10 @@ class AppSettingsForm(QtGui.QWidget):
         self.btnSaveMyAccount.pressed.connect(self.save_settings)
         self.checkNoBackup.stateChanged.connect(self.disable_enable_backup_elements)
 
-
+    def setFocusOrder(self):
+        self.setTabOrder(self.txtFullName, self.txtCurrentPass)
+        self.setTabOrder(self.txtNewPass,self.txtTypeAgainPass)
+        
     def disable_enable_backup_elements(self):
         if self.checkNoBackup.isChecked():
             self.txtFileName.setEnabled(False)
