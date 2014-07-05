@@ -31,3 +31,8 @@ def create_db():
         db.syncdb()
     except:
         pass
+
+
+
+def create_backup():
+    pass

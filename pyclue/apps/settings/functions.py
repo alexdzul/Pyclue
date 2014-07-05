@@ -17,6 +17,7 @@ def decode_password(pw):
 
 
 def create_settings(user_fullName, user_password):
+    import datetime
     try:
         main = MainSettings()
         main.user_fullName = user_fullName
@@ -28,6 +29,7 @@ def create_settings(user_fullName, user_password):
         main.file_name_backup = "keys"
         main.file_name_sufix_backup = "_DD-MM-YY.bak"
         main.version = VERSION
+        main.last_backup = datetime.datetime.today()
         main.save()
         return True
     except:

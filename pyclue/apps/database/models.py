@@ -4,6 +4,7 @@ import os, sys, traceback
 from pyclue.apps.settings.models import MainSettings
 from pyclue.apps.keys.models import Key
 
+
 """
 Objeto con funciones básicas de la base de datos
 """
@@ -29,4 +30,3 @@ class database():
                 return False
         except:
             return False
-
