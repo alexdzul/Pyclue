@@ -29,7 +29,6 @@ def create_settings(user_fullName, user_password):
         main.file_name_backup = "keys"
         main.file_name_sufix_backup = ".DDMMYY.bak"
         main.version = VERSION
-        main.last_backup = datetime.datetime.today()
         main.save()
         return True
     except:

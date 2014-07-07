@@ -40,11 +40,15 @@ def generate_backup():
     :return: None
     """
     settings = get_settings()
-    print settings.last_backup
-    if settings.last_backup == None or settings.last_backup == "": # Aqui entra cuando es primera vez
-        create_backup_file(settings)
-    else:
-        pass
+    if settings:
+        print "hay setting"
+        print settings.last_backup
+        if settings.last_backup == None or settings.last_backup == "": # Aqui entra cuando es primera vez
+            print "no hay nada en settings"
+            create_backup_file(settings)
+        else:
+            print "hay algo en la fecha del backup"
+            pass
 
 
 def create_backup_file(settings):
