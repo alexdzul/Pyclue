@@ -65,3 +65,5 @@ pyclue/*.db
 *.db
 pyclue/pyclue.db
 *.prefs
+backups/*.*
+backups/*.bak
