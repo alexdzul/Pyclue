@@ -1,6 +1,3 @@
 "Lista de pendientes por hacer"
 
-
-1. Al cargar el form principal del listado de keys, si no existe ninguno entonces debe desactivar los campos de texto
-de la derecha.
-3. En la pestaña "About Pyclue" revisar que funcionen los links de las páginas que aparecen en el texto.
+1. Generar el módulo para crear backups.

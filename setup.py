@@ -11,8 +11,6 @@ mainteiner_email = AUTHOR_EMAIL
 licence = LICENCE
 
 
-
-
 APP = ['pyclue/main.py']
 DATA_FILES =[('resources',['pyclue/resources/img']),
              ('resources/keys',['pyclue/resources/keys/']),

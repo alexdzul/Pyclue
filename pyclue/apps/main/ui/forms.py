@@ -200,6 +200,7 @@ class MainForm(QtGui.QMainWindow):
         self.set_statusBar(message)
         self.set_list_elements()
         self.setConnectors()
+        self.disable_fields()
         Center(self)
 
 
@@ -337,6 +338,7 @@ class MainForm(QtGui.QMainWindow):
 
     def get_item_info(self):
         try:
+            self.disable_fields()
             self.hide_password()
             item = self.listKeys.currentItem()
             item = item.data(QtCore.Qt.UserRole).toPyObject()
@@ -398,6 +400,7 @@ class MainForm(QtGui.QMainWindow):
 
     def setConnectors(self):
         self.listKeys.currentItemChanged.connect(self.get_item_info)
+        self.listKeys.doubleClicked.connect(self.enable_fields)
         self.btnViewPassword.pressed.connect(self.show_hide_password)
         self.btnDelete.pressed.connect(self.delete_element)
         self.btnSave.pressed.connect(self.update_element)
@@ -405,6 +408,27 @@ class MainForm(QtGui.QMainWindow):
         self.connect(self.addKeyAction, QtCore.SIGNAL("triggered()"),self.show_add_key_form)
         self.connect(self.lockAction, QtCore.SIGNAL("triggered()"),self.hide_this_and_show_login)
         self.connect(self.settingsAction, QtCore.SIGNAL("triggered()"),self.show_appSettings_form)
+
+    def enable_fields(self):
+        self.btnDelete.setEnabled(True)
+        self.btnSave.setEnabled(True)
+        self.txtEmail.setEnabled(True)
+        self.txtNameKey.setEnabled(True)
+        self.txtNotes.setEnabled(True)
+        self.txtPassword.setEnabled(True)
+        self.txtUsername.setEnabled(True)
+        self.txtWebPage.setEnabled(True)
+
+    def disable_fields(self):
+        self.btnSave.setEnabled(False)
+        self.btnDelete.setEnabled(False)
+        self.txtEmail.setEnabled(False)
+        self.txtNameKey.setEnabled(False)
+        self.txtNotes.setEnabled(False)
+        self.txtPassword.setEnabled(False)
+        self.txtUsername.setEnabled(False)
+        self.txtWebPage.setEnabled(False)
+
 
     def clean_textbox_info(self):
         try:
@@ -450,6 +474,7 @@ class MainForm(QtGui.QMainWindow):
         item_updated = update_key(key_object, new_data)
         if item_updated:
             item_list.setText(item_updated.name)
+            self.disable_fields() # Deshabilitamos de nuevo los campos
             self.hide_password()
         else:
             QtGui.QMessageBox.about(self, "Error",

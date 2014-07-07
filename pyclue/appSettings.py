@@ -42,7 +42,6 @@ ABOUT_MESSAGE = "<html><head/><body><p><span style=\" font-size:12pt; font-weigh
 
 
 def get_data_path():
-    print "entra a get_complete_db_path"
     database_file = None
     from os.path import expanduser
     try:
@@ -53,9 +52,20 @@ def get_data_path():
             database_file = "data/%s" % DB_NAME
     except:
         database_file = None
-    print "El path es: %s" % database_file
     return database_file
 
+
+def get_backup_path():
+    from os.path import expanduser
+    try:
+        if OS_RUNING == "darwin": # if it's running on MAC
+            path = expanduser("~")
+            database_file = "%s/Library/%s/backups"%(path, SOFTWARE_NAME)
+        else:
+            database_file = "backups"
+    except:
+        database_file = None
+    return database_file
 
 
 
@@ -80,6 +90,10 @@ def create_default_backups_path():
 
 
 def create_data_path():
+    """
+    Función para crear el path donde irá almacenada la base de datos.
+    :return: True or False
+    """
     from os.path import expanduser
     if OS_RUNING == "darwin":
         path = expanduser("~")

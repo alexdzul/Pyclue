@@ -207,7 +207,7 @@ class AppSettingsForm(QtGui.QWidget):
         self.Periodicity = self.cmbPeriodicity.currentText()
 
 
-    def save_settings(self):
+    def save_settings_(self):
         self.get_form_data()
         if self.CurrentPass == decode_password(self.settings.user_password):
             if self.password_1 == self.password_2:
@@ -227,6 +227,34 @@ class AppSettingsForm(QtGui.QWidget):
         else:
             alert(self,"Info","Incorrect current password")
             self.txtCurrentPass.setFocus()
+
+    def save_settings(self):
+        success = False
+        self.get_form_data()
+        if self.CurrentPass == "":
+            success = save_settings(self.Periodicity,self.NoBackup,
+                              self.NumFiles, self.FileName,self.FullName)
+        else:
+            if self.CurrentPass == decode_password(self.settings.user_password):
+                if self.password_1 == self.password_2:
+                    if self.password_1 == "":
+                        success = save_settings(self.Periodicity,self.NoBackup,
+                                  self.NumFiles, self.FileName,self.FullName)
+                    else:
+                        success = save_settings(self.Periodicity,self.NoBackup,
+                                  self.NumFiles, self.FileName,self.FullName,self.password_1)
+                else:
+                    alert(self,"Info","Passwords don't match.")
+            else:
+                alert(self,"info","Incorrect current password")
+        if success:
+            self.close()
+            self.Main.load_settings()
+
+
+
+
+
 
 
     def setConnectors(self):

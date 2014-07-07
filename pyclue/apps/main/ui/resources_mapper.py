@@ -38,8 +38,6 @@ def get_locked_icon():
         path =  os.path.abspath(os.path.join(RESOURCES_DIR,'main/%s'%img))
     else:
         path =  os.path.abspath(os.path.join("%s/%s"%(PROJECT_DIR,RESOURCES_DIR),'main/%s'%img))
-    print "the lock path is:"
-    print path
     return path
 
 
