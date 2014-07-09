@@ -13,6 +13,7 @@ class Key(Model):
     webpage = CharField()
     password = CharField()
     notes = TextField()
+    date_created = DateField()
 
     class Meta:
         database = SqliteDatabase(get_data_path())

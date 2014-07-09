@@ -131,6 +131,7 @@ class AddKeyForm(QtGui.QWidget):
         self.btnSave.clicked.connect(self.save)
 
     def save(self):
+        from datetime import datetime
         key = Key()
         key.name = self.txtName.text()
         key.username = self.txtUsername.text()
@@ -138,6 +139,7 @@ class AddKeyForm(QtGui.QWidget):
         key.password = self.txtPassword.text()
         key.webpage = self.txtWebpage.text()
         key.notes = self.txtNotes.toPlainText()
+        key.date_created = datetime.today().date()
         success = save_key(key)
         if not success:
             alert(self, "Error","Error al escribir los datos")
