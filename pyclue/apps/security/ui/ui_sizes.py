@@ -1,10 +1,11 @@
-'''
+"""
 Created on 26/06/2014
 @author: alex
-'''
+"""
 __author__ = 'alex'
-from PyQt4 import QtCore
+from PyQt5 import QtCore
 from pyclue.appSettings import OS_RUNING
+
 
 def get_login_size(self):
     if OS_RUNING == "darwin":

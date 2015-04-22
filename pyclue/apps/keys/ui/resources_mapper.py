@@ -1,6 +1,6 @@
 __author__ = 'alex'
 from pyclue.appSettings import RESOURCES_DIR, PROJECT_DIR, OS_RUNING
-from PyQt4 import QtGui
+from PyQt5 import QtGui
 import os
 
 def set_icon(self):

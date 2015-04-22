@@ -10,7 +10,6 @@ def get_save_icon():
         path =  os.path.abspath(os.path.join(RESOURCES_DIR,'img/%s'%img))
     else:
         path =  os.path.abspath(os.path.join("%s/%s"%(PROJECT_DIR,RESOURCES_DIR),'img/%s'%img))
-    print path
     return path
 
 

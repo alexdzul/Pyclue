@@ -1,0 +1,51 @@
+/*Ejemplo para un elemento en especifico*/
+/*QPushButton#btnLogin{*/
+    /*background: red;*/
+/*}*/
+
+QDialog{
+    color:#666666;
+    background-color:white;
+}
+
+QPushButton {
+    background: #ffffff;
+    border-radius: 4px;
+    border: 1px solid lightgray;
+    color: #888;
+    height: 25px;
+    padding: 4px 8px;
+    width: 80px;
+}
+
+QLabel#lblMasterPassword{
+    color: #6e7078;
+    font-family: "Consolas", "Menlo", "Courier", monospace;
+}
+
+QLineEdit#txtMasterPassword{
+    qproperty-frame: false;
+    color: #7aa79a;
+    height: 30px;
+    border: 0px solid;
+    background-color: transparent;
+}
+
+QLineEdit#txtMasterPassword:focus{
+    qproperty-frame: false;
+    outline: 0;
+}
+
+QPushButton:hover {
+    background: #eeeeff;
+    color: #666666;
+}
+
+QPushButton:pressed {
+    background: #9eddcd;
+}
+
+
+QDialog {
+    background: white;
+}

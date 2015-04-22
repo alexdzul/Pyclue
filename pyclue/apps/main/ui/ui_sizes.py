@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 __author__ = 'alex'
-from PyQt4 import QtCore
+from PyQt5 import QtCore
 from pyclue.appSettings import OS_RUNING
 
 

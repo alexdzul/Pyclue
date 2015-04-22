@@ -18,7 +18,6 @@ class database():
             message = "Error" + str(sys.exc_info()[0]) + " " +\
                       str(sys.exc_info()[1]) + " " + \
                       str(sys.exc_info()[2])  + " " + traceback.format_exc()
-            print message
         pass
 
     def exist(self, db_path):

@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 __author__ = 'alex'
-import os, sys, traceback
+import os
+import sys
+import traceback
 from pyclue.appSettings import DB_NAME, PROJECT_DIR, get_backup_path, get_data_path
 from pyclue.apps.settings.functions import get_settings
 from pyclue.apps.database.models import database
@@ -13,15 +15,13 @@ Obtiene el path de la base de datos
 """
 def get_db_path():
     try:
-        path = os.path.join(PROJECT_DIR,DB_NAME)
+        path = os.path.join(PROJECT_DIR, DB_NAME)
         path = os.path.normpath(path)
-        print path
         return path
     except:
         message = "Error" + str(sys.exc_info()[0]) + " " +\
-                      str(sys.exc_info()[1]) + " " + \
-                      str(sys.exc_info()[2])  + " " + traceback.format_exc()
-        print message
+                  str(sys.exc_info()[1]) + " " + \
+                  str(sys.exc_info()[2]) + " " + traceback.format_exc()
         return None
 
 
@@ -103,11 +103,11 @@ def need_backup(settings):
         last_backup = parse(str(settings.last_backup))
         today = parse((str(datetime.datetime.today().date())))
         #Sumamos al ultimo backup los días entre cada respaldo
-        print "Días identificados por cada respaldo:",get_days_between_backup(settings)
+        print("Días identificados por cada respaldo:",get_days_between_backup(settings))
         nextDateBackup = last_backup + datetime.timedelta(days=get_days_between_backup(settings))
         #Validamos si ya se requiere y retornamos True o False.
-        print "último respaldo:",settings.last_backup
-        print "Siguiente respaldo:",nextDateBackup
+        print("último respaldo:", settings.last_backup)
+        print("Siguiente respaldo:", nextDateBackup)
         if nextDateBackup <= today:
             return True
         else:

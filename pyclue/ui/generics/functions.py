@@ -1,10 +1,10 @@
 __author__ = 'alex'
-from PyQt4 import QtGui
+from PyQt5 import QtGui, QtWidgets
 from pyclue.appSettings import APP_ICON
 
 def Center(uiForm):
         qr = uiForm.frameGeometry()
-        cp = QtGui.QDesktopWidget().availableGeometry().center()
+        cp = QtWidgets.QDesktopWidget().availableGeometry().center()
         qr.moveCenter(cp)
         uiForm.move(qr.topLeft())
 
@@ -14,4 +14,4 @@ def SetIcon(uiForm):
 
 
 def alert(uiForm, title, message):
-    QtGui.QMessageBox.about(uiForm, title, message)
+    QtWidgets.QMessageBox.about(uiForm, title, message)

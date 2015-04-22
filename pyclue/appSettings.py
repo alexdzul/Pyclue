@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 __author__ = 'alex'
-import os, sys
+import os
+import sys
 
 OS_RUNING = sys.platform
 SOFTWARE_NAME = "Pyclue"
@@ -8,20 +9,18 @@ VERSION = "0.1"
 AUTHOR = "Alex Dzul"
 AUTHOR_EMAIL = "alexexc2@gmail.com"
 LICENCE = "GPL v2"
+SECRET_KEY = 'mysecretpassword'
 
 
 PROJECT_DIR = "pyclue"
 RESOURCES_DIR = 'resources'
 
 if OS_RUNING == "darwin":
-    APP_ICON = os.path.join(RESOURCES_DIR,'img/key.ico')
+    APP_ICON = os.path.join(RESOURCES_DIR, 'img/key.ico')
 else:
-    APP_ICON = os.path.join("%s/%s"%(PROJECT_DIR,RESOURCES_DIR),'img/key.ico')
+    APP_ICON = os.path.join("%s/%s" % (PROJECT_DIR, RESOURCES_DIR), ' img/key.ico')
     
 DB_NAME = 'pyclue.db'
-
-
-
 
 
 WELCOME_MESSAGE = "Before starting using this application, " \
@@ -40,9 +39,7 @@ ABOUT_MESSAGE = "<html><head/><body><p><span style=\" font-size:12pt; font-weigh
                 "<br/></p></body></html>"
 
 
-
 def get_data_path():
-    database_file = None
     from os.path import expanduser
     try:
         if OS_RUNING == "darwin": # if it's running on MAC
@@ -68,16 +65,15 @@ def get_backup_path():
     return database_file
 
 
-
-""" ====================================================================================
-Functions to create the primary paths.
-========================================================================================"""
+# ====================================================================================
+# Functions to create the primary paths.
+# ========================================================================================
 
 def create_default_backups_path():
     if OS_RUNING == "darwin":
         from os.path import expanduser
         path = expanduser("~")
-        path = "%s/Library/%s/backups/"%(path, SOFTWARE_NAME)
+        path = "%s/Library/%s/backups/" % (path, SOFTWARE_NAME)
     else:
         path = "backups"
     try:
@@ -86,7 +82,6 @@ def create_default_backups_path():
             return True
     except:
         return False
-
 
 
 def create_data_path():
@@ -98,6 +93,7 @@ def create_data_path():
     if OS_RUNING == "darwin":
         path = expanduser("~")
         path = "%s/Library/%s/data/"%(path, SOFTWARE_NAME)
+        print(path)
     else:
         path = "data"
     try:

@@ -23,7 +23,7 @@ def delete_key(key):
 
 def update_key(key_obj, new_data_dict):
     try:
-        key_obj.name =  new_data_dict['name']
+        key_obj.name = new_data_dict['name']
         key_obj.username = new_data_dict['username']
         key_obj.email = new_data_dict['email']
         key_obj.password = encrypt_password(new_data_dict['password'])
@@ -34,11 +34,12 @@ def update_key(key_obj, new_data_dict):
     except:
         return None
 
-"""
-Returns keys objects.
-If return_list is True, the functions
-return a list element.
-"""
+
 def get_keys():
+    """
+    Returns keys objects.
+    If return_list is True, the functions
+    return a list element.
+    """
     keys = Key.select()
     return keys
